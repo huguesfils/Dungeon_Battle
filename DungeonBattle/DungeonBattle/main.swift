@@ -41,17 +41,17 @@ class Hero {
 }
 
 class Wizard: Hero {
-    
+    // healing only, not himself
 }
 
 class Warrior: Hero {
-    
+    // medium skills
 }
 
 class Colossus: Hero {
-    
+    // powerful, less damages, only fists
 }
 
 class Dwarf: Hero {
-    
+    // big axe, power damage, low life
 }
