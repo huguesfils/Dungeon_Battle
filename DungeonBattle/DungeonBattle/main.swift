@@ -6,8 +6,6 @@
 //  Copyright © 2018 Hugues Fils. All rights reserved.
 //
 
-// creation du fichier xcode
-
 class Game {
     var player1: String
     var player2: String
@@ -22,7 +20,7 @@ class Game {
 
 class Player {
     var name: String
-    var team = [String]()
+    var team = [String: Int]()
     init (name: String){
         self.name = name
     }
@@ -40,12 +38,12 @@ class Hero {
     }
 }
 
-class Wizard: Hero {
-    // healing only, not himself
-}
-
 class Warrior: Hero {
     // medium skills
+}
+
+class Wizard: Hero {
+    // healing only, not himself
 }
 
 class Colossus: Hero {
