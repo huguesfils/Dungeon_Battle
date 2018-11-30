@@ -16,6 +16,21 @@ class Game {
         self.player2 = player2
         self.playerTurn = playerTurn
     }
+    
+    func nameDeclaration(){
+        print ("Quel est votre nom ?")
+        if let player1 = readLine(){
+            print("Bonjour \(player1)")
+        }
+        if let player2 = readLine(){
+            print("Bonjour \(player2)")
+        }
+    }
+    
+    
+    
+    
+    
 }
 
 class Player {
@@ -35,6 +50,13 @@ class Hero {
         self.name = name
         self.life = life
         self.weapon = weapon
+    }
+    
+    func nameDeclaration(){
+        print ("Quel est votre nom ?")
+        if let characterName = readLine(){
+            print("Bonjour \(characterName)")
+        }
     }
 }
 
