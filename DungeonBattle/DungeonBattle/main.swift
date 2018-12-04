@@ -7,11 +7,11 @@
 //
 
 class Game {
-    var player1: String
-    var player2: String
+    var player1: Player
+    var player2: Player
     var playerTurn: Int
     
-    init(player1: String, player2: String, playerTurn: Int) {
+    init(player1: Player, player2: Player, playerTurn: Int) {
         self.player1 = player1
         self.player2 = player2
         self.playerTurn = playerTurn
@@ -35,18 +35,24 @@ class Game {
 
 class Player {
     var name: String
-    var team = [String: Int]()
+    var team = [Hero]()
     init (name: String){
         self.name = name
+    }
+    
+    func addHeroTeam(hero: Hero) {
+        if (team.count < 3) {
+            team.append(hero)
+        }
     }
 }
 
 class Hero {
     var name: String
     var life: Int
-    var weapon: String
+    var weapon: Weapon
     
-    init(name: String, life: Int, weapon: String){
+    init(name: String, life: Int, weapon: Weapon){
         self.name = name
         self.life = life
         self.weapon = weapon
@@ -60,8 +66,30 @@ class Hero {
     }
 }
 
+enum WeaponType {
+    case Sword
+    case Stick
+    case Axe
+    case Fists
+}
+
+class Weapon{
+    var type: WeaponType
+    var effect: Int
+    
+    init(type: WeaponType, effect: Int){
+        self.type = type
+        self.effect = effect
+    }
+}
+
 class Warrior: Hero {
     // medium skills
+    init(name: String){
+        self.name = name
+        self.life = 100
+        self.weapon = Weapon(type: .Sword, effect: -10)
+    }
 }
 
 class Wizard: Hero {
