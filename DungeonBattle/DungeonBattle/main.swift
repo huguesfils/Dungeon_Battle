@@ -85,10 +85,8 @@ class Weapon{
 
 class Warrior: Hero {
     // medium skills
-    init(name: String){
-        self.name = name
-        self.life = 100
-        self.weapon = Weapon(type: .Sword, effect: -10)
+    init(){
+            super.init(name: "", life: 100, weapon: .init(type: .Sword, effect: -10))
     }
 }
 
