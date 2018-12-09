@@ -40,6 +40,13 @@ class Player {
         self.name = name
     }
     
+    func enterYourName() {
+        print ("Quel est votre nom ?")
+        if let name = readLine(){
+            print("Bonjour \(name)")
+        }
+    }
+    
     func addHeroTeam(hero: Hero) {
         if (team.count < 3) {
             team.append(hero)
@@ -91,13 +98,22 @@ class Warrior: Hero {
 }
 
 class Wizard: Hero {
-    // healing only, not himself
+ // healing only, not himself
+    init(){
+        super.init(name: "", life: 70, weapon: .init(type: .Stick, effect: 5))
+    }
 }
 
 class Colossus: Hero {
     // powerful, less damages, only fists
+    init(){
+        super.init(name: "", life: 150, weapon: .init(type: .Fists, effect: -20))
+    }
 }
 
 class Dwarf: Hero {
     // big axe, power damage, low life
+    init(){
+        super.init(name: "", life: 50, weapon: .init(type: .Axe, effect: -40))
+    }
 }
