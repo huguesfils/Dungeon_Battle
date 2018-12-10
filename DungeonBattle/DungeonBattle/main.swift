@@ -1,35 +1,21 @@
-//
-//  main.swift
-//  DungeonBattle
-//
-//  Created by Hugues Fils Caparos on 23/11/2018.
-//  Copyright © 2018 Hugues Fils. All rights reserved.
-//
 
 class Game {
-    var player1: Player
-    var player2: Player
+    var player1: Player?
+    var player2: Player?
     var playerTurn: Int
     
-    init(player1: Player, player2: Player, playerTurn: Int) {
-        self.player1 = player1
-        self.player2 = player2
+    init(playerTurn: Int) {
         self.playerTurn = playerTurn
     }
     
-    func nameDeclaration(){
-        print ("Quel est votre nom ?")
-        if let player1 = readLine(){
-            print("Bonjour \(player1)")
+    func createPlayer() -> Player{
+        var name = ""
+        while name.isEmpty {
+            print ("Quel est votre nom ?")
+            name = readLine()!
         }
-        if let player2 = readLine(){
-            print("Bonjour \(player2)")
-        }
+        return Player(name: name)
     }
-    
-    
-    
-    
     
 }
 
@@ -39,19 +25,12 @@ class Player {
     init (name: String){
         self.name = name
     }
-    
-    func enterYourName() {
-        print ("Quel est votre nom ?")
-        if let name = readLine(){
-            print("Bonjour \(name)")
-        }
-    }
-    
+
     func addHeroTeam(hero: Hero) {
         if (team.count < 3) {
             team.append(hero)
         }
-    }
+    }// ajouter le nom de chaque héro au demarrage + enum héro faire une fonction createPlayer (nom + team de 3 hero) ?
 }
 
 class Hero {
@@ -93,27 +72,33 @@ class Weapon{
 class Warrior: Hero {
     // medium skills
     init(){
-            super.init(name: "", life: 100, weapon: .init(type: .Sword, effect: -10))
+        super.init(name: "", life: 100, weapon: Weapon(type: .Sword, effect: -10))
     }
 }
 
 class Wizard: Hero {
- // healing only, not himself
+    // healing only, not himself
     init(){
-        super.init(name: "", life: 70, weapon: .init(type: .Stick, effect: 5))
+        super.init(name: "", life: 70, weapon: Weapon(type: .Stick, effect: 5))
     }
 }
 
 class Colossus: Hero {
     // powerful, less damages, only fists
     init(){
-        super.init(name: "", life: 150, weapon: .init(type: .Fists, effect: -20))
+        super.init(name: "", life: 150, weapon: Weapon(type: .Fists, effect: -20))
     }
 }
 
 class Dwarf: Hero {
     // big axe, power damage, low life
     init(){
-        super.init(name: "", life: 50, weapon: .init(type: .Axe, effect: -40))
+        super.init(name: "", life: 50, weapon: Weapon(type: .Axe, effect: -40))
     }
 }
+
+let game = Game(playerTurn: 0)
+let player1 = game.createPlayer()
+print("Player 1 name is \(player1.name)")
+// creer player2
+
