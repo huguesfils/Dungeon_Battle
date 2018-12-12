@@ -16,6 +16,7 @@ class Game {
         }
         return Player(name: name)
     }
+
     
 }
 
@@ -100,5 +101,7 @@ class Dwarf: Hero {
 let game = Game(playerTurn: 0)
 let player1 = game.createPlayer()
 print("Player 1 name is \(player1.name)")
-// creer player2
+let player2 = game.createPlayer()
+print("Player 2 name is \(player2.name)")
+
 
