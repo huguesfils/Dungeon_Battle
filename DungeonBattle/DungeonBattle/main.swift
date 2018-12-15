@@ -3,6 +3,7 @@ class Game {
     var player1: Player?
     var player2: Player?
     var playerTurn: Int
+    var team = [Hero]()
     
     init(playerTurn: Int) {
         self.playerTurn = playerTurn
@@ -16,8 +17,25 @@ class Game {
         }
         return Player(name: name)
     }
-
     
+    func createTeam(){
+        print("Veuillez choisir 3 personnages parmi la liste suivante")
+        if let choice = readLine(){
+            switch choice {
+            case "1. Guerrier":
+                team.append(Warrior.init())
+            case "2. Mage":
+                team.append(Wizard.init())
+            case "3. Colosse":
+                team.append(Colossus.init())
+            case "4. Nain":
+                team.append(Dwarf.init())
+            default:
+                print("Veuillez taper un chiffre compris entre 1 et 4")
+            }
+        }
+        
+    }
 }
 
 class Player {
@@ -26,8 +44,8 @@ class Player {
     init (name: String){
         self.name = name
     }
-
-    func addHeroTeam(hero: Hero) {
+    
+    func addHeroTeam(hero: Hero){
         if (team.count < 3) {
             team.append(hero)
         }
@@ -103,5 +121,4 @@ let player1 = game.createPlayer()
 print("Player 1 name is \(player1.name)")
 let player2 = game.createPlayer()
 print("Player 2 name is \(player2.name)")
-
 
