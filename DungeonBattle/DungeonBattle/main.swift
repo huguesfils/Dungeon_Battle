@@ -18,25 +18,68 @@ class Game {
         return Player(name: name)
     }
     
-    func createTeam(){
+    func createHero() -> Hero{
         print("Veuillez choisir 3 personnages parmi la liste suivante")
-        if let choice = readLine(){
-            switch choice {
-            case "1. Guerrier":
-                team.append(Warrior.init())
-            case "2. Mage":
-                team.append(Wizard.init())
-            case "3. Colosse":
-                team.append(Colossus.init())
-            case "4. Nain":
-                team.append(Dwarf.init())
-            default:
-                print("Veuillez taper un chiffre compris entre 1 et 4")
+        // 1. Afficher la liste des possibilités avec des print
+        // 2. Lire ce que l'utilisateur choisi (entre 1 et 4)
+        // 3. En fonction de ce qu'il a saisi, on crée le bon personnage
+        
+        print("1. Guerrier (PV = 100, Epée = 10 dégâts \n2. Mage\n3. Colosse\n4. Nain")
+        
+        var hero: Hero!
+        var isHeroCreated = false
+        
+        while !isHeroCreated {
+            if let line = readLine(){
+                if let choice = Int(line) {
+                    switch choice {
+                    case 1:
+                        let warriorName = createHeroName()
+                        hero = Warrior(name: warriorName)
+                        isHeroCreated = true
+                    case 2:
+                        let wizardName = createHeroName()
+                        hero = Wizard(name: wizardName)
+                        isHeroCreated = true
+                    case 3:
+                        let colossusName = createHeroName()
+                        hero = Colossus(name: colossusName)
+                        isHeroCreated = true
+                    case 4:
+                        let dwarfName = createHeroName()
+                        hero = Dwarf(name: dwarfName)
+                        isHeroCreated = true
+                    default:
+                        print("Veuillez taper un chiffre compris entre 1 et 4")
+                    }
+                }
+                else {
+                    print("Veuillez taper un chiffre compris entre 1 et 4")
+                    isHeroCreated = false
+                }
             }
         }
         
+        return hero
+    }
+    
+    func createHeroName() -> String {
+        var name = ""
+        while name.isEmpty {
+            print ("Quel est son nom ?")
+            name = readLine()!
+        }
+        return name
+    }
+    
+    func createTeam() {
+        for _ in 1...3 {
+            let hero = createHero()
+            team.append(hero)
+        }
     }
 }
+
 
 class Player {
     var name: String
@@ -49,7 +92,7 @@ class Player {
         if (team.count < 3) {
             team.append(hero)
         }
-    }// ajouter le nom de chaque héro au demarrage + enum héro faire une fonction createPlayer (nom + team de 3 hero) ?
+    }
 }
 
 class Hero {
@@ -90,35 +133,31 @@ class Weapon{
 
 class Warrior: Hero {
     // medium skills
-    init(){
-        super.init(name: "", life: 100, weapon: Weapon(type: .Sword, effect: -10))
+    init(name: String){
+        super.init(name: name, life: 100, weapon: Weapon(type: .Sword, effect: -10))
     }
 }
 
 class Wizard: Hero {
     // healing only, not himself
-    init(){
-        super.init(name: "", life: 70, weapon: Weapon(type: .Stick, effect: 5))
+    init(name: String){
+        super.init(name: name, life: 70, weapon: Weapon(type: .Stick, effect: 5))
     }
 }
 
 class Colossus: Hero {
     // powerful, less damages, only fists
-    init(){
-        super.init(name: "", life: 150, weapon: Weapon(type: .Fists, effect: -20))
+    init(name: String){
+        super.init(name: name, life: 150, weapon: Weapon(type: .Fists, effect: -20))
     }
 }
 
 class Dwarf: Hero {
     // big axe, power damage, low life
-    init(){
-        super.init(name: "", life: 50, weapon: Weapon(type: .Axe, effect: -40))
+    init(name: String){
+        super.init(name: name, life: 50, weapon: Weapon(type: .Axe, effect: -40))
     }
 }
 
 let game = Game(playerTurn: 0)
-let player1 = game.createPlayer()
-print("Player 1 name is \(player1.name)")
-let player2 = game.createPlayer()
-print("Player 2 name is \(player2.name)")
-
+game.createTeam()
