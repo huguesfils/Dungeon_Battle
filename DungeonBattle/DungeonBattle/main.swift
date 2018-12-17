@@ -20,10 +20,6 @@ class Game {
     
     func createHero() -> Hero{
         print("Veuillez choisir 3 personnages parmi la liste suivante")
-        // 1. Afficher la liste des possibilités avec des print
-        // 2. Lire ce que l'utilisateur choisi (entre 1 et 4)
-        // 3. En fonction de ce qu'il a saisi, on crée le bon personnage
-        
         print("1. Guerrier (PV = 100, Epée = 10 dégâts \n2. Mage\n3. Colosse\n4. Nain")
         
         var hero: Hero!
