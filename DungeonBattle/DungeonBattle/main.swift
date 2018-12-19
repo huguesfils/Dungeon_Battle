@@ -1,4 +1,3 @@
-
 class Game {
     var player1: Player?
     var player2: Player?
@@ -12,15 +11,16 @@ class Game {
     func createPlayer() -> Player{
         var name = ""
         while name.isEmpty {
-            print ("Quel est votre nom ?")
+            print ("\nQuel est votre nom ?")
             name = readLine()!
+            print("\nBienvenue \(name) !")
         }
         return Player(name: name)
     }
     
     func createHero() -> Hero{
-        print("Veuillez choisir 3 personnages parmi la liste suivante")
-        print("1. Guerrier (PV = 100, Epée = 10 dégâts \n2. Mage\n3. Colosse\n4. Nain")
+        print("\nVeuillez choisir 3 personnages parmi la liste suivante")
+        print("1. Guerrier (PV = 100, Epée = 10 dégâts \n2. Mage\n3. Colosse\n4. Nain") // ajouter les infos des persos
         
         var hero: Hero!
         var isHeroCreated = false
@@ -79,15 +79,8 @@ class Game {
 
 class Player {
     var name: String
-    var team = [Hero]()
     init (name: String){
         self.name = name
-    }
-    
-    func addHeroTeam(hero: Hero){
-        if (team.count < 3) {
-            team.append(hero)
-        }
     }
 }
 
@@ -100,13 +93,6 @@ class Hero {
         self.name = name
         self.life = life
         self.weapon = weapon
-    }
-    
-    func nameDeclaration(){
-        print ("Quel est votre nom ?")
-        if let characterName = readLine(){
-            print("Bonjour \(characterName)")
-        }
     }
 }
 
@@ -155,5 +141,20 @@ class Dwarf: Hero {
     }
 }
 
-let game = Game(playerTurn: 0)
-game.createTeam()
+let game = Game(playerTurn: 1)
+
+
+func player1Turn(){
+    print ("C'est le tour du joueur 1")
+    let player1 = game.createPlayer()
+    game.createTeam()
+}
+
+func player2Turn(){
+    print ("C'est au joueur 2")
+    let player2 = game.createPlayer()
+    game.createTeam()
+}
+
+player1Turn()
+player2Turn()
