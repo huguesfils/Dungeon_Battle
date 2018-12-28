@@ -1,3 +1,11 @@
+//
+//  main.swift
+//  DungeonBattle
+//
+//  Created by Hugues Fils Caparos on 24/12/2018.
+//  Copyright © 2018 Hugues Fils. All rights reserved.
+//
+
 class Game {
     var player1: Player?
     var player2: Player?
@@ -25,6 +33,15 @@ class Game {
         let player2 = createPlayer()
         player2.createTeam()
     }
+    
+    func fight(){
+        var turn = 0
+        print ("Tour \(turn)")
+//       choix perso equipe joueur1 et 2, effet .weapon - health hero adverse
+//        turn +1 fin tour joueur (ah$jout else end avec mage solo ou team = 0
+        
+    }
+    
 }
 
 let game = Game(playerTurn: 1)
@@ -38,3 +55,5 @@ game.startGame()
  idem tour 1
  si reste personne ou mage solo fin du jeu (
 */
+
+
