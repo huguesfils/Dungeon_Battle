@@ -37,11 +37,26 @@ class Game {
     func fight(){
         var turn = 0
         print ("Tour \(turn)")
-//       choix perso equipe joueur1 et 2, effet .weapon - health hero adverse
-//        turn +1 fin tour joueur (ah$jout else end avec mage solo ou team = 0
-        
+        if let playerChoice = readLine(){
+            if let choice = Int(playerChoice){
+                switch choice {
+                case 1:
+                    print ("\(Player2!.team)")
+                    let Hero in player1.team =
+                case 2:
+                    
+                    
+                default:
+                    <#code#>
+                }
+            }
+            
+            
+            //       choix perso equipe joueur1 et 2, effet .weapon - health hero adverse
+            //        turn +1 fin tour joueur (ah$jout else end avec mage solo ou team is empty
+            
+        }
     }
-    
 }
 
 let game = Game(playerTurn: 1)
