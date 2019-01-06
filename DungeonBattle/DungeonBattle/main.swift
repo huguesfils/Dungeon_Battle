@@ -34,12 +34,12 @@ class Game {
         player2.createTeam()
     }
     
-    func fight(){
+    func fight()-> Hero{
         print ("""
-            Veuillez choisir avec quel personnage vous voulez combatre ce tour (1,2 ou 3)
-            1: \(String(describing: player1?.team[0]))
-            2: \(String(describing: player1?.team[1]))
-            3: \(String(describing: player1?.team[2]))
+            Veuillez choisir avec quel personnage vous voulez combatre ce tour ( tapez 1,2 ou 3)
+            1: \(player1!.team[0])
+            2: \(player1!.team[1])
+            3: \(player1!.team[2])
             """)
         for _ in 0..<player1!.team.count{
             let fighter = readLine()
@@ -54,37 +54,35 @@ class Game {
                 print("Je ne comprends pas")
                 
             }
+            return fighter
             
         }
-        
-        /*var turn = 0
-         print ("Tour \(turn)")
-         if let playerChoice = readLine(){
-         if let choice = Int(playerChoice){
-         switch choice {
-         case 1:
-         print ("\(Player2!.team)")
-         let Hero in player1.team =
-         case 2:
-         
-         
-         default:
-         <#code#>
-         }
-         }
-         
-         
-         //       choix perso equipe joueur1 et 2, effet .weapon - health hero adverse
-         //        turn +1 fin tour joueur (ah$jout else end avec mage solo ou team is empty
-         
-         }*/
+        print ("""
+            Veuillez choisir avec quel personnage vous voulez attaquer ce tour ( tapez 1,2 ou 3)
+            1: \(player2!.team[0])
+            2: \(player2!.team[1])
+            3: \(player2!.team[2])
+            """)
+        for _ in 0..<player2!.team.count{
+            let fighter = readLine()
+            switch fighter{
+            case "1" :
+                print ("Vous avez choisi \(player2!.team[0])")
+            case "2":
+                print("Vous avez choisi \(player2!.team[1])")
+            case "3":
+                print("Vous avez choisi \(player2!.team[2])")
+            default:
+                print("Je ne comprends pas")
+            }
+            
+            
+        }
     }
 }
 
 let game = Game(playerTurn: 1)
 
-
-game.fight()
 
 /*creer le combat au tour par tour
  choisir un perso de l'équipe, puis choisir un adversaire (eneleve point de vie en fonction de l'arme)
