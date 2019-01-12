@@ -70,54 +70,17 @@ class Game {
         }
     }
     
+    func fight(){
+        var lifePoint = Int // while ?
+        lifePoint = chooseHero(player: player1!).weapon.effect - chooseHero(player: player2!).life // opération correct 2, pb syntaxe
+        if chooseHero(player: Player) === Wizard{
+            Wizard.weapon.effect +
+        }
+        
+    
+    }
     
 }
-
-/*func chooseHero() -> Hero{
- print ("""
- Veuillez choisir avec quel personnage vous voulez combatre ce tour ( tapez 1,2 ou 3)
- 1: \(player1!.team[0])
- 2: \(player1!.team[1])
- 3: \(player1!.team[2])
- """)
- for _ in 0..<player1!.team.count{
- let fighter = readLine()
- switch fighter{
- case "1" :
- print ("Vous avez choisi \(player1!.team[0])")
- case "2":
- print("Vous avez choisi \(player1!.team[1])")
- case "3":
- print("Vous avez choisi \(player1!.team[2])")
- default:
- print("Je ne comprends pas")
- 
- }
- return fighter
- 
- }
- print ("""
- Veuillez choisir avec quel personnage vous voulez attaquer ce tour ( tapez 1,2 ou 3)
- 1: \(player2!.team[0])
- 2: \(player2!.team[1])
- 3: \(player2!.team[2])
- """)
- for _ in 0..<player2!.team.count{
- let fighter = readLine()
- switch fighter{
- case "1" :
- print ("Vous avez choisi \(player2!.team[0])")
- case "2":
- print("Vous avez choisi \(player2!.team[1])")
- case "3":
- print("Vous avez choisi \(player2!.team[2])")
- default:
- print("Je ne comprends pas")
- }
- 
- 
- }
- }*/
 
 
 let game = Game(playerTurn: 1)
