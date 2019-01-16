@@ -6,9 +6,10 @@
 //  Copyright © 2018 Hugues Fils. All rights reserved.
 //
 
+
 class Game {
-    var player1: Player?
-    var player2: Player?
+    var player1: Player!
+    var player2: Player!
     var playerTurn: Int
     
     
@@ -27,20 +28,27 @@ class Game {
     }
     
     func startGame(){
-        let player1 = createPlayer()
+        player1 = createPlayer()
         player1.createTeam()
         print("\nC'est au joueur 2.")
-        let player2 = createPlayer()
+        player2 = createPlayer()
         player2.createTeam()
     }
     
-    func chooseHero(player: Player) -> Hero {
-        print ("""
+    func chooseHero(player: Player, pickerName: String) -> Hero {
+        /*print ("""
             Veuillez choisir un personnage (tapez 1, 2 ou 3)
-            1: \(player.team[0])
-            2: \(player.team[1])
-            3: \(player.team[2])
-            """)
+            1: \(player.team[0].name) - \(player.team[0].life)
+            2: \(player.team[1].name) - \(player.team[1].life)
+            3: \(player.team[2].name) - \(player.team[2].life)
+            """)*/
+        print("----------------------------------")
+        print("\(pickerName)")
+        print("Veuillez choisir un personnage (tapez 1, 2 ou 3)")
+        for i in 0...player.team.count-1 {
+            print("\(i+1): \(player.team[i]) ==> \(player.team[i].name) - PV = \(player.team[i].life) - Dégâts/soin \(player.team[i].weapon.effect)")
+        }
+        print("----------------------------------")
         var index = -1
         
         repeat {
@@ -70,20 +78,38 @@ class Game {
         }
     }
     
-    func fight(){
-        var lifePoint = Int // while ?
-        lifePoint = chooseHero(player: player1!).weapon.effect - chooseHero(player: player2!).life // opération correct 2, pb syntaxe
+    func displayTeam(player: Player){
+        for hero in player.team{
+            print("\(hero.name) - \(hero.life)")
+        }
+    }
+    
+    /*func fight(){
+        var lifePoint : Int // while ?
+        lifePoint = chooseHero(player: Player).weapon.effect - chooseHero(player: Player).life // opération correct ?, pb syntaxe
         if chooseHero(player: Player) === Wizard{
-            Wizard.weapon.effect +
+            chooseHero(player: Player).wizard.weapon.effect + chooseHero(player: Player).life
         }
         
     
+    }*/
+    
+    func fight(attacker: Player) {
+        let opponent = getOpponent(player: attacker)
+        let attackerHero = chooseHero(player: attacker, pickerName: attacker.name)
+        let opponentHero = chooseHero(player: opponent, pickerName: attacker.name)
+        
+        opponentHero.life += attackerHero.weapon.effect
     }
     
 }
 
 
 let game = Game(playerTurn: 1)
+game.startGame()
+game.displayTeam(player: game.player2)
+game.fight(attacker: game.player1)
+game.displayTeam(player: game.player2)
 
 
 /*creer le combat au tour par tour

@@ -40,7 +40,12 @@ class Player {
     
     func createHero() -> Hero{
         print("\nVeuillez choisir un personnages parmi la liste suivante:")
-        print("1. Guerrier (PV = 100, Epée = 10 dégâts) \n2. Mage\n3. Colosse\n4. Nain") // ajouter les infos des persos
+        print("""
+            1. Guerrier (PV = 100, Epée = 10 dégâts)
+            2. Mage (PV = 70, Baton = 5 soins)
+            3. Colosse (PV = 150, Poings = 20 dégâts)
+            4. Nain (PV = 50, Hache = 40 dégâts)
+            """) // ajouter les infos des persos
         
         var hero: Hero!
         var isHeroCreated = false
@@ -58,7 +63,12 @@ class Player {
                             print("\nUn seul Mage par équipe.")
                             isHeroCreated = false
                             print("\nVeuillez choisir un personnages parmi la liste suivante:")
-                            print("1. Guerrier (PV = 100, Epée = 10 dégâts) \n2. Mage\n3. Colosse\n4. Nain")
+                            print("""
+                            1. Guerrier (PV = 100, Epée = 10 dégâts)
+                            2. Mage (PV = 70, Baton = 5 soin)
+                            3. Colosse (PV = 150, Poings = 20 dégâts)
+                            4. Nain (PV = 50, Hache = 40 dégâts)
+                            """)
                         }else{
                             let wizardName = createHeroName()
                             hero = Wizard(name: wizardName)
