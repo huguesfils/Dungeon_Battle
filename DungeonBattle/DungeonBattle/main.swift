@@ -120,4 +120,7 @@ game.displayTeam(player: game.player2)
  si reste personne ou mage solo fin du jeu (
  */
 
-
+/*if player1.readline()===player2.redlin(){
+print ("Ce nom est déjà pris")
+ } return nil
+*/
