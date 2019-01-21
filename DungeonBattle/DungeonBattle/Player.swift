@@ -18,8 +18,21 @@ class Player {
         while name.isEmpty {
             print ("Quel est son nom ?")
             name = readLine()!
+            if !isNameUnique(name: name) {
+                  print ("Ce nom est déjà pris !")
+                name = ""
+            }
         }
         return name
+    }
+    
+    func isNameUnique(name: String) -> Bool{
+        for i in team{
+            if name == i.name{
+                return false
+            }
+        }
+        return true
     }
     
     func createTeam() {

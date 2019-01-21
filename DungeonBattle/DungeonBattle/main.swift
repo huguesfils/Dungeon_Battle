@@ -107,9 +107,16 @@ class Game {
 
 let game = Game(playerTurn: 1)
 game.startGame()
-game.displayTeam(player: game.player2)
-game.fight(attacker: game.player1)
-game.displayTeam(player: game.player2)
+
+while !game.finished {
+    game.roll()
+}
+print("jeu terminé")
+game.printStat()
+
+//game.displayTeam(player: game.player2)
+//game.fight(attacker: game.player1)
+//game.displayTeam(player: game.player2)
 
 
 /*creer le combat au tour par tour
@@ -120,7 +127,7 @@ game.displayTeam(player: game.player2)
  si reste personne ou mage solo fin du jeu (
  */
 
-/*if player1.readline()===player2.redlin(){
+/*if player1.readline()===player2.readline(){
 print ("Ce nom est déjà pris")
  } return nil
 */
