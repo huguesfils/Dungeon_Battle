@@ -58,7 +58,7 @@ class Player {
             2. Mage (PV = 70, Baton = 5 soins)
             3. Colosse (PV = 150, Poings = 20 dégâts)
             4. Nain (PV = 50, Hache = 40 dégâts)
-            """) // ajouter les infos des persos
+            """)
         
         var hero: Hero!
         var isHeroCreated = false

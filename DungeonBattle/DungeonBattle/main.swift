@@ -107,12 +107,12 @@ class Game {
 
 let game = Game(playerTurn: 1)
 game.startGame()
-
+/*
 while !game.finished {
     game.roll()
 }
 print("jeu terminé")
-game.printStat()
+game.printStat()*/
 
 //game.displayTeam(player: game.player2)
 //game.fight(attacker: game.player1)
@@ -131,3 +131,5 @@ game.printStat()
 print ("Ce nom est déjà pris")
  } return nil
 */
+
+// nom unique ne marche pas hors du player !
