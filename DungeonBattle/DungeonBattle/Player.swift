@@ -23,14 +23,13 @@ class Player {
                 name = ""
             }
         }
+        heroNameDict[name] = name
         return name
     }
     
     func isNameUnique(name: String) -> Bool{
-        for i in team{
-            if name == i.name{
-                return false
-            }
+        if heroNameDict[name] != nil{
+            return false
         }
         return true
     }

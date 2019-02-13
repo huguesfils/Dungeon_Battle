@@ -5,13 +5,10 @@
 //  Created by Hugues Fils Caparos on 24/12/2018.
 //  Copyright © 2018 Hugues Fils. All rights reserved.
 //
-
-
 class Game {
     var player1: Player!
     var player2: Player!
     var playerTurn: Int
-    
     
     init(playerTurn: Int) {
         self.playerTurn = playerTurn
@@ -36,12 +33,6 @@ class Game {
     }
     
     func chooseHero(player: Player, pickerName: String) -> Hero {
-        /*print ("""
-            Veuillez choisir un personnage (tapez 1, 2 ou 3)
-            1: \(player.team[0].name) - \(player.team[0].life)
-            2: \(player.team[1].name) - \(player.team[1].life)
-            3: \(player.team[2].name) - \(player.team[2].life)
-            """)*/
         print("----------------------------------")
         print("\(pickerName)")
         print("Veuillez choisir un personnage (tapez 1, 2 ou 3)")
@@ -84,16 +75,6 @@ class Game {
         }
     }
     
-    /*func fight(){
-        var lifePoint : Int // while ?
-        lifePoint = chooseHero(player: Player).weapon.effect - chooseHero(player: Player).life // opération correct ?, pb syntaxe
-        if chooseHero(player: Player) === Wizard{
-            chooseHero(player: Player).wizard.weapon.effect + chooseHero(player: Player).life
-        }
-        
-    
-    }*/
-    
     func fight(attacker: Player) {
         let opponent = getOpponent(player: attacker)
         let attackerHero = chooseHero(player: attacker, pickerName: attacker.name)
@@ -102,12 +83,25 @@ class Game {
         opponentHero.life += attackerHero.weapon.effect
     }
     
+    func finished()-> Bool{
+        if player1.team.hero.life = 0{
+            return true
+        }
+        if player1.team.hero.life = 0{
+            return true
+        }
+        if 
+            
+            
+    }
+    
 }
 
 
 let game = Game(playerTurn: 1)
 game.startGame()
-/*
+
+ /*
 while !game.finished {
     game.roll()
 }
@@ -127,9 +121,7 @@ game.printStat()*/
  si reste personne ou mage solo fin du jeu (
  */
 
-/*if player1.readline()===player2.readline(){
-print ("Ce nom est déjà pris")
- } return nil
-*/
 
-// nom unique ne marche pas hors du player !
+
+// creer une methode qui permet de dire si le jeu est terminé. Si il ne reste que des mages ou si une des deux equipes est morte.
+//

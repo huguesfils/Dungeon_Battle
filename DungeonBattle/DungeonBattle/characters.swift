@@ -5,6 +5,9 @@
 //  Created by Hugues Fils Caparos on 24/12/2018.
 //  Copyright © 2018 Hugues Fils. All rights reserved.
 //
+
+var heroNameDict = [String: Any]()
+
 class Hero {
     var name: String
     var life: Int
