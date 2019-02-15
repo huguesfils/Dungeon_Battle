@@ -83,30 +83,28 @@ class Game {
         opponentHero.life += attackerHero.weapon.effect
     }
     
-    func finished()-> Bool{
-        if player1.team.hero.life = 0{
-            return true
+    func finished(player: Player) -> Bool {
+        for hero in player.team{
+            if hero.life == 0 {
+                return true
+            }
+            if hero === Wizard.self {
+                return true
+            }
         }
-        if player1.team.hero.life = 0{
-            return true
-        }
-        if 
-            
-            
+        return false
     }
-    
 }
-
 
 let game = Game(playerTurn: 1)
 game.startGame()
 
- /*
-while !game.finished {
-    game.roll()
-}
-print("jeu terminé")
-game.printStat()*/
+/*
+ while !game.finished {
+ game.roll()
+ }
+ print("jeu terminé")
+ game.printStat()*/
 
 //game.displayTeam(player: game.player2)
 //game.fight(attacker: game.player1)
