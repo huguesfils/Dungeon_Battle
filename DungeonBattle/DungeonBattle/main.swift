@@ -84,17 +84,22 @@ class Game {
     }
     
     func finished(player: Player) -> Bool {
+        var wizardCount = 0
+        var heroAlive = 0
         for hero in player.team{
-            if hero.life <= 0 {
-                return true
+            if hero.life > 0 {
+                heroAlive += 1
             }
-            if hero === Wizard.self {
-                return true
+            if hero is Wizard {
+                wizardCount += 1
             }
         }
-        return false
+        if heroAlive > 0 && heroAlive != wizardCount{
+            return false
+        }
+        return true
     }
-    
+
     func roll(){
         fight(attacker: player1)
         print("C'est au tour de \(player2.name)")
@@ -102,6 +107,10 @@ class Game {
         print("C'est au tour de \(player1.name)")
     }
 }
+
+
+
+
 
 let game = Game(playerTurn: 1)
 game.startGame()
