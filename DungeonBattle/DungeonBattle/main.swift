@@ -85,7 +85,7 @@ class Game {
     
     func finished(player: Player) -> Bool {
         for hero in player.team{
-            if hero.life == 0 {
+            if hero.life <= 0 {
                 return true
             }
             if hero === Wizard.self {
@@ -94,17 +94,23 @@ class Game {
         }
         return false
     }
+    
+    func roll(){
+        fight(attacker: player1)
+        print("C'est au tour de \(player2.name)")
+        fight(attacker: player2)
+        print("C'est au tour de \(player1.name)")
+    }
 }
 
 let game = Game(playerTurn: 1)
 game.startGame()
-
-/*
- while !game.finished {
+while !game.finished(player: game.player1) {
  game.roll()
  }
  print("jeu terminé")
- game.printStat()*/
+
+//ne peux soigner ses alliés + faire disparaitre les perso morts
 
 //game.displayTeam(player: game.player2)
 //game.fight(attacker: game.player1)
