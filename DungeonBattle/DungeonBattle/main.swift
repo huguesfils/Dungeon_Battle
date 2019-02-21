@@ -8,13 +8,9 @@
 class Game {
     var player1: Player!
     var player2: Player!
-    var playerTurn: Int
+    var currentPlayer: Player!
     
-    init(playerTurn: Int) {
-        self.playerTurn = playerTurn
-    }
-    
-    func createPlayer() -> Player{
+    func createPlayer() -> Player {
         var name = ""
         while name.isEmpty {
             print ("Quel est votre nom ?")
@@ -30,6 +26,7 @@ class Game {
         print("\nC'est au joueur 2.")
         player2 = createPlayer()
         player2.createTeam()
+        self.currentPlayer = player1
     }
     
     func chooseHero(player: Player, pickerName: String) -> Hero {
@@ -75,12 +72,47 @@ class Game {
         }
     }
     
-    func fight(attacker: Player) {
+    func fight3(attacker: Player) {
+        var opponentHero: Hero!
         let opponent = getOpponent(player: attacker)
         let attackerHero = chooseHero(player: attacker, pickerName: attacker.name)
-        let opponentHero = chooseHero(player: opponent, pickerName: attacker.name)
-        
+        if attackerHero is Wizard {
+            opponentHero = chooseHero(player: attacker, pickerName: attacker.name)
+        }else{
+            opponentHero = chooseHero(player: opponent, pickerName: attacker.name)
+        }
         opponentHero.life += attackerHero.weapon.effect
+    }
+    
+    func fight2(attacker: Player) {
+        var opponent = getOpponent(player: attacker)
+        let attackerHero = chooseHero(player: attacker, pickerName: attacker.name)
+        if attackerHero is Wizard {
+            opponent = attacker
+        }
+        let opponentHero = chooseHero(player: opponent, pickerName: attacker.name)
+        opponentHero.life += attackerHero.weapon.effect
+    }
+    
+    func fight(attacker: Player) {
+        let attackerHero = chooseHero(player: attacker, pickerName: attacker.name)
+        if attackerHero is Wizard {
+            var healedHero:Hero!
+            repeat {
+                healedHero = chooseHero(player: attacker, pickerName: attacker.name)
+                if attackerHero.name == healedHero.name {
+                    print("\(attackerHero.name) ne peut pas s'auto-soigner")
+                }
+            } while attackerHero.name == healedHero.name
+            healedHero.life += attackerHero.weapon.effect
+            if healedHero.life > healedHero.maxLife {
+                healedHero.life = healedHero.maxLife
+            }
+        } else {
+            let opponent = getOpponent(player: attacker)
+            let opponentHero = chooseHero(player: opponent, pickerName: attacker.name)
+            opponentHero.life += attackerHero.weapon.effect
+        }
     }
     
     func finished(player: Player) -> Bool {
@@ -101,25 +133,22 @@ class Game {
     }
 
     func roll(){
-        fight(attacker: player1)
-        print("C'est au tour de \(player2.name)")
-        fight(attacker: player2)
-        print("C'est au tour de \(player1.name)")
+        print("C'est au tour de \(currentPlayer.name)")
+        fight(attacker: currentPlayer)
+        currentPlayer = getOpponent(player: currentPlayer)
     }
 }
 
 
 
-
-
-let game = Game(playerTurn: 1)
+let game = Game()
 game.startGame()
-while !game.finished(player: game.player1) {
+while !game.finished(player: game.player1) && !game.finished(player: game.player2){
  game.roll()
  }
  print("jeu terminé")
 
-//ne peux soigner ses alliés + faire disparaitre les perso morts
+// faire disparaitre les perso morts
 
 //game.displayTeam(player: game.player2)
 //game.fight(attacker: game.player1)

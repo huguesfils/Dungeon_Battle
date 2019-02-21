@@ -11,11 +11,13 @@ var heroNameDict = [String: Any]()
 class Hero {
     var name: String
     var life: Int
+    var maxLife: Int
     var weapon: Weapon
     
     init(name: String, life: Int, weapon: Weapon){
         self.name = name
         self.life = life
+        self.maxLife = life
         self.weapon = weapon
     }
    
