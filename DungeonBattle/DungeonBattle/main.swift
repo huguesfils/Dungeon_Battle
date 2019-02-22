@@ -33,12 +33,15 @@ class Game {
         print("----------------------------------")
         print("\(pickerName)")
         print("Veuillez choisir un personnage (tapez 1, 2 ou 3)")
+        
         for i in 0...player.team.count-1 {
-            print("\(i+1): \(player.team[i]) ==> \(player.team[i].name) - PV = \(player.team[i].life) - Dégâts/soin \(player.team[i].weapon.effect)")
+            /*if player.team[i] is Wizard{
+             player.team[i] = "Magicien"
+             }*/
+            print("\(i+1): \(player.team[i]) ==> \(player.team[i].name) - PV = \(player.team[i].life) - Effet \(player.team[i].weapon.effect)")
         }
         print("----------------------------------")
         var index = -1
-        
         repeat {
             if let choice = readLine(){ // on vérifie que l'utilisateur a bien saisi une String
                 if let choiceInt = Int(choice){ // on vérifie que ce qui est saisi est bien un entier (on essaye de le convertir, si ça passe OK)
@@ -52,11 +55,15 @@ class Game {
                     }
                 }
             }
-        } while index < 0 //on recommence tant que index n'a pas une valeur correcte (car un tableau commence toujours à l'index 0)
+           /* if player.team[index].life <= 0 {
+                
+            }*/
+        } while index < 0 && player.team[index].life > 0 //on recommence tant que index n'a pas une valeur correcte (car un tableau commence toujours à l'index 0)
         
         return player.team[index]
-    }
     
+    
+    }
     func getOpponent(player: Player) -> Player {
         if player === player1! {
             return player2!
@@ -72,28 +79,6 @@ class Game {
         }
     }
     
-    func fight3(attacker: Player) {
-        var opponentHero: Hero!
-        let opponent = getOpponent(player: attacker)
-        let attackerHero = chooseHero(player: attacker, pickerName: attacker.name)
-        if attackerHero is Wizard {
-            opponentHero = chooseHero(player: attacker, pickerName: attacker.name)
-        }else{
-            opponentHero = chooseHero(player: opponent, pickerName: attacker.name)
-        }
-        opponentHero.life += attackerHero.weapon.effect
-    }
-    
-    func fight2(attacker: Player) {
-        var opponent = getOpponent(player: attacker)
-        let attackerHero = chooseHero(player: attacker, pickerName: attacker.name)
-        if attackerHero is Wizard {
-            opponent = attacker
-        }
-        let opponentHero = chooseHero(player: opponent, pickerName: attacker.name)
-        opponentHero.life += attackerHero.weapon.effect
-    }
-    
     func fight(attacker: Player) {
         let attackerHero = chooseHero(player: attacker, pickerName: attacker.name)
         if attackerHero is Wizard {
@@ -101,7 +86,7 @@ class Game {
             repeat {
                 healedHero = chooseHero(player: attacker, pickerName: attacker.name)
                 if attackerHero.name == healedHero.name {
-                    print("\(attackerHero.name) ne peut pas s'auto-soigner")
+                    print("\(attackerHero.name) ne peut pas s'auto-soigner !")
                 }
             } while attackerHero.name == healedHero.name
             healedHero.life += attackerHero.weapon.effect
@@ -131,7 +116,7 @@ class Game {
         }
         return true
     }
-
+    
     func roll(){
         print("C'est au tour de \(currentPlayer.name)")
         fight(attacker: currentPlayer)
@@ -144,26 +129,35 @@ class Game {
 let game = Game()
 game.startGame()
 while !game.finished(player: game.player1) && !game.finished(player: game.player2){
- game.roll()
- }
- print("jeu terminé")
+    game.roll()
+}
+print("jeu terminé")
 
-// faire disparaitre les perso morts
+// faire disparaitre les perso morts => voir commentaire ou remplacer nom par version française
 
 //game.displayTeam(player: game.player2)
 //game.fight(attacker: game.player1)
 //game.displayTeam(player: game.player2)
 
 
-/*creer le combat au tour par tour
- choisir un perso de l'équipe, puis choisir un adversaire (eneleve point de vie en fonction de l'arme)
- si mort -> inutilisable
- changement tour
- idem tour 1
- si reste personne ou mage solo fin du jeu (
- */
-
-
-
-// creer une methode qui permet de dire si le jeu est terminé. Si il ne reste que des mages ou si une des deux equipes est morte.
-//
+/*func fight3(attacker: Player) {
+ var opponentHero: Hero!
+ let opponent = getOpponent(player: attacker)
+ let attackerHero = chooseHero(player: attacker, pickerName: attacker.name)
+ if attackerHero is Wizard {
+ opponentHero = chooseHero(player: attacker, pickerName: attacker.name)
+ }else{
+ opponentHero = chooseHero(player: opponent, pickerName: attacker.name)
+ }
+ opponentHero.life += attackerHero.weapon.effect
+ }
+ 
+ func fight2(attacker: Player) {
+ var opponent = getOpponent(player: attacker)
+ let attackerHero = chooseHero(player: attacker, pickerName: attacker.name)
+ if attackerHero is Wizard {
+ opponent = attacker
+ }
+ let opponentHero = chooseHero(player: opponent, pickerName: attacker.name)
+ opponentHero.life += attackerHero.weapon.effect
+ }*/
