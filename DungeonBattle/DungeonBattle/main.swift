@@ -9,6 +9,7 @@ class Game {
     var player1: Player!
     var player2: Player!
     var currentPlayer: Player!
+    var rollCount = 0
     
     func createPlayer() -> Player {
         var name = ""
@@ -30,17 +31,7 @@ class Game {
     }
     
     func chooseHero(player: Player, pickerName: String) -> Hero {
-        print("----------------------------------")
-        print("\(pickerName)")
-        print("Veuillez choisir un personnage (tapez 1, 2 ou 3)")
-        
-        for i in 0...player.team.count-1 {
-            /*if player.team[i] is Wizard{
-             player.team[i] = "Magicien"
-             }*/
-            print("\(i+1): \(player.team[i]) ==> \(player.team[i].name) - PV = \(player.team[i].life) - Effet \(player.team[i].weapon.effect)")
-        }
-        print("----------------------------------")
+       displayChooseHero(player: player, pickerName: pickerName)
         var index = -1
         repeat {
             if let choice = readLine(){ // on vérifie que l'utilisateur a bien saisi une String
@@ -49,21 +40,37 @@ class Game {
                     case 1, 2, 3 : // si l'utilisateur a saisi 1, 2 ou 3
                         index = choiceInt-1 // on met à jour le bon index
                         print ("Vous avez choisi \(player.team[index])")
+                        if player.team[index].life <= 0 {
+                            print ("Ce personnage est mort.")
+                            displayChooseHero(player: player, pickerName: pickerName)
+                            index = -1
+                        }
                         
                     default: // dans les autres cas index n'est pas touché et vaut donc -1
                         print("Je ne comprends pas")
                     }
                 }
             }
-           /* if player.team[index].life <= 0 {
-                
-            }*/
-        } while index < 0 && player.team[index].life > 0 //on recommence tant que index n'a pas une valeur correcte (car un tableau commence toujours à l'index 0)
+            
+        } while index < 0 //on recommence tant que index n'a pas une valeur correcte (car un tableau commence toujours à l'index 0)
         
         return player.team[index]
-    
-    
     }
+    
+    func displayChooseHero(player: Player, pickerName: String){
+        print("----------------------------------")
+        print("\(pickerName)")
+        print("Veuillez choisir un personnage (tapez 1, 2 ou 3)")
+        
+        for i in 0...player.team.count-1 {
+            
+            if player.team[i].life > 0{
+                print("\(i+1): \(player.team[i]) ==> \(player.team[i].name) - PV = \(player.team[i].life) - Effet \(player.team[i].weapon.effect)")
+            }
+        }
+        print("----------------------------------")
+    }
+    
     func getOpponent(player: Player) -> Player {
         if player === player1! {
             return player2!
@@ -104,14 +111,15 @@ class Game {
         var wizardCount = 0
         var heroAlive = 0
         for hero in player.team{
-            if hero.life > 0 {
+            if hero.life >= 0 {
                 heroAlive += 1
-            }
-            if hero is Wizard {
-                wizardCount += 1
+                if hero is Wizard {
+                    wizardCount += 1
+                }
             }
         }
-        if heroAlive > 0 && heroAlive != wizardCount{
+        print ("heroAlive = \(heroAlive) - wizardCount = \(wizardCount)")
+        if heroAlive >= 0 && heroAlive != wizardCount{
             return false
         }
         return true
@@ -121,8 +129,12 @@ class Game {
         print("C'est au tour de \(currentPlayer.name)")
         fight(attacker: currentPlayer)
         currentPlayer = getOpponent(player: currentPlayer)
+        rollCount += 1
     }
+    
+    
 }
+
 
 
 
@@ -132,12 +144,16 @@ while !game.finished(player: game.player1) && !game.finished(player: game.player
     game.roll()
 }
 print("jeu terminé")
+if game.finished(player: game.player1){
+    print("Félicitaion \(game.player2.name) !")
+}else{
+    print("Félicitaion \(game.player1.name) !")
+}
+print ("La partie s'est terminée en \(game.rollCount) tours.")
+print("\n\n")
+game.displayChooseHero(player: game.player1, pickerName: game.player1.name)
+game.displayChooseHero(player: game.player2, pickerName: game.player2.name)
 
-// faire disparaitre les perso morts => voir commentaire ou remplacer nom par version française
-
-//game.displayTeam(player: game.player2)
-//game.fight(attacker: game.player1)
-//game.displayTeam(player: game.player2)
 
 
 /*func fight3(attacker: Player) {
@@ -161,3 +177,6 @@ print("jeu terminé")
  let opponentHero = chooseHero(player: opponent, pickerName: attacker.name)
  opponentHero.life += attackerHero.weapon.effect
  }*/
+
+
+//voir commande random pour gerer le hazard Int.random => Apparition du coffre au contenant une nouvelle arme 

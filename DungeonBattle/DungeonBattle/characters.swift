@@ -46,17 +46,17 @@ class Warrior: Hero, CustomStringConvertible {
         super.init(name: name, life: 100, weapon: Weapon(type: .Sword, effect: -10))
     }
     public var description: String{
-        return "Warrior"
+        return "Guerrier"
     }
 }
 
 class Wizard: Hero, CustomStringConvertible {
     // healing only, not himself
     init(name: String){
-        super.init(name: name, life: 70, weapon: Weapon(type: .Stick, effect: 5))
+        super.init(name: name, life: 130, weapon: Weapon(type: .Stick, effect: 5))
     }
     public var description: String{
-        return "Wizard"
+        return "Magicien"
     }
 }
 
@@ -66,7 +66,7 @@ class Colossus: Hero, CustomStringConvertible {
         super.init(name: name, life: 150, weapon: Weapon(type: .Fists, effect: -20))
     }
     public var description: String{
-        return "Colossus"
+        return "Collosse"
     }
 }
 
@@ -76,6 +76,11 @@ class Dwarf: Hero, CustomStringConvertible {
         super.init(name: name, life: 50, weapon: Weapon(type: .Axe, effect: -40))
     }
     public var description: String{
-        return "Dwarf"
+        return "Nain"
     }
 }
+
+
+/* let myWarrior = Warrior()
+print(myWarrior) => fait implicitiment reference à myWarriior.description
+*/
