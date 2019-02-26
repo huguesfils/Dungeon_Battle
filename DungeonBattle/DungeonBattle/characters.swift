@@ -28,6 +28,10 @@ enum WeaponType {
     case Stick
     case Axe
     case Fists
+    case LongSword
+    case BigAxe
+    case GreatStick
+    case IronGloves
 }
 
 class Weapon{
