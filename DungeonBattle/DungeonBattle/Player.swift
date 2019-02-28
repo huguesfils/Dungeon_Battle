@@ -66,9 +66,10 @@ class Player {
     }
     
     func createHero() -> Hero{
+        let warrior = Warrior(name: "A")
         print("\nVeuillez choisir un personnages parmi la liste suivante:")
         print("""
-            1. Guerrier (PV = 100, Epée = 10 dégâts)
+            1. \(warrior.info)
             2. Mage (PV = 70, Baton = 5 soins)
             3. Colosse (PV = 150, Poings = 20 dégâts)
             4. Nain (PV = 50, Hache = 40 dégâts)

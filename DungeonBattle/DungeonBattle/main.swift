@@ -88,7 +88,7 @@ class Game {
     
     func fight(attacker: Player) {
         let attackerHero = chooseHero(player: attacker, pickerName: attacker.name)
-        bonus()
+        bonus(hero: attackerHero)
         if attackerHero is Wizard {
             var healedHero:Hero!
             repeat {
@@ -133,34 +133,14 @@ class Game {
         rollCount += 1
     }
     
-    func bonus()-> Weapon{
-        let bonusChest = ["LongSword", "Great Stick", "Big Axe", "Iron Gloves"]
-        var bonusWeapon = bonusChest.randomElement()!
-        var bonusWeapon = player.team.weapon
-        let randomnumber = Int.random(in: 0...10)
-        
-        if chooseHero(player: game.currentPlayer, pickerName: game.currentPlayer.name) is Warrior{
-            bonusWeapon = bonusChest[0]
+    func bonus(hero: Hero){
+        let randomNumber = Int.random(in: 0...2)
+        if rollCount % 2 == randomNumber {
+            print("Un coffre contenant une nouvelle arme est apparût \(hero.name) s'en équipe !")
+            hero.weapon.effect = hero.genWeaponEffect()
+            print ("Le nouvel effet de son arme est de \(hero.weapon.effect).")
         }
-        if chooseHero(player: game.currentPlayer, pickerName: game.currentPlayer.name) is Wizard{
-            bonusWeapon = bonusChest[1]
-        }
-        if chooseHero(player: game.currentPlayer, pickerName: game.currentPlayer.name) is Colossus{
-            bonusWeapon = bonusChest[2]
-        }
-        if chooseHero(player: game.currentPlayer, pickerName: game.currentPlayer.name) is Dwarf{
-            bonusWeapon = bonusChest[3]
-        }
-        if rollCount == randomnumber {
-            print("Un coffre contenant \(bonusWeapon) est apparût \(nomDuPersonnage) s'en équipe !")
-        }
-        return randomWeapon
     }
-    /*
- Choisir un personnage de son équipe => ligne 91
- Un coffre apparaît devant le personnage, il l'ouvre et... il s'équipe d'une nouvelle arme !
- Choisir un personnage de l'équipe adverse à attaquer ou un personnage de sa propre équipe à soigner dans le cas du Mage.
- */
 }
 
 

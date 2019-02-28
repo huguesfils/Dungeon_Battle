@@ -20,7 +20,19 @@ class Hero {
         self.maxLife = life
         self.weapon = weapon
     }
-   
+    
+    func genWeaponEffect() -> Int{
+        if weapon.effect < 0 {
+            return Int.random(in: weapon.effect - 10...weapon.effect - 5)
+        }
+        return Int.random(in: weapon.effect + 5...weapon.effect + 10)
+    }
+    public var description: String{
+        return ""
+    }
+    public var info: String{
+        return "\(description) (PV = \(life), Effet = \(weapon.type)\(weapon.effect))"
+    }
 }
 
 enum WeaponType {
@@ -28,11 +40,8 @@ enum WeaponType {
     case Stick
     case Axe
     case Fists
-    case LongSword
-    case BigAxe
-    case GreatStick
-    case IronGloves
 }
+//voir rawValue 
 
 class Weapon{
     var type: WeaponType
@@ -44,12 +53,14 @@ class Weapon{
     }
 }
 
+
+
 class Warrior: Hero, CustomStringConvertible {
     // medium skills
     init(name: String){
         super.init(name: name, life: 100, weapon: Weapon(type: .Sword, effect: -10))
     }
-    public var description: String{
+    override public var description: String{
         return "Guerrier"
     }
 }
@@ -59,8 +70,8 @@ class Wizard: Hero, CustomStringConvertible {
     init(name: String){
         super.init(name: name, life: 130, weapon: Weapon(type: .Stick, effect: 5))
     }
-    public var description: String{
-        return "Magicien"
+    override public var description: String{
+        return "📌Magicien"
     }
 }
 
@@ -69,7 +80,7 @@ class Colossus: Hero, CustomStringConvertible {
     init(name: String){
         super.init(name: name, life: 150, weapon: Weapon(type: .Fists, effect: -20))
     }
-    public var description: String{
+    override public var description: String{
         return "Collosse"
     }
 }
@@ -79,7 +90,7 @@ class Dwarf: Hero, CustomStringConvertible {
     init(name: String){
         super.init(name: name, life: 50, weapon: Weapon(type: .Axe, effect: -40))
     }
-    public var description: String{
+    override public var description: String{
         return "Nain"
     }
 }
