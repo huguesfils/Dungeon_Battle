@@ -31,7 +31,7 @@ class Hero {
         return ""
     }
     public var info: String{
-        return "\(description) (PV = \(life), Effet = \(weapon.type)\(weapon.effect))"
+        return "\(description) (PV = \(life), \(weapon.type) = \(weapon.effect))"
     }
 }
 
@@ -40,8 +40,9 @@ enum WeaponType {
     case Stick
     case Axe
     case Fists
+    case Bow
 }
-//voir rawValue 
+//voir rawValue
 
 class Weapon{
     var type: WeaponType
@@ -61,7 +62,7 @@ class Warrior: Hero, CustomStringConvertible {
         super.init(name: name, life: 100, weapon: Weapon(type: .Sword, effect: -10))
     }
     override public var description: String{
-        return "Guerrier"
+        return "Guerrier 🗡"
     }
 }
 
@@ -71,7 +72,7 @@ class Wizard: Hero, CustomStringConvertible {
         super.init(name: name, life: 130, weapon: Weapon(type: .Stick, effect: 5))
     }
     override public var description: String{
-        return "📌Magicien"
+        return "Magicien 🔮"
     }
 }
 
@@ -81,17 +82,27 @@ class Colossus: Hero, CustomStringConvertible {
         super.init(name: name, life: 150, weapon: Weapon(type: .Fists, effect: -20))
     }
     override public var description: String{
-        return "Collosse"
+        return "Collosse 💪"
     }
 }
 
 class Dwarf: Hero, CustomStringConvertible {
     // big axe, power damage, low life
     init(name: String){
-        super.init(name: name, life: 50, weapon: Weapon(type: .Axe, effect: -40))
+        super.init(name: name, life: 70, weapon: Weapon(type: .Axe, effect: -40))
     }
     override public var description: String{
-        return "Nain"
+        return "Nain ⛏"
+    }
+}
+
+class Archer: Hero, CustomStringConvertible {
+    // medium skills
+    init(name: String){
+        super.init(name: name, life: 50, weapon: Weapon(type: .Bow, effect: -50))
+    }
+    override public var description: String{
+        return "Archer 🏹"
     }
 }
 

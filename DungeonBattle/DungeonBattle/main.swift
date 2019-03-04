@@ -14,7 +14,7 @@ class Game {
     func createPlayer() -> Player {
         var name = ""
         while name.isEmpty {
-            print ("Quel est votre nom ?")
+            print ("\nQuel est votre nom ?")
             name = readLine()!
         }
         print("\nBienvenue \(name) !")
@@ -22,6 +22,12 @@ class Game {
     }
     
     func startGame(){
+        print ("""
+                Bienvenue dans Dungeon Battle !
+                \nLe but du jeu est d'éliminer l'équipe adverse. Choisissez vos héros avec soin,
+                et gardez en tête que le mage ne peux que soigner ses alliés !
+                \n⚔️ Que la partie commence ! ⚔️\n
+                """)
         player1 = createPlayer()
         player1.createTeam()
         print("\nC'est au joueur 2.")
@@ -59,18 +65,18 @@ class Game {
     
     func displayChooseHero(player: Player, pickerName: String){
         print("----------------------------------")
-        print("\(pickerName)")
-        print("Veuillez choisir un personnage (tapez 1, 2 ou 3)")
+        print("\(pickerName) :")
+        print("Veuillez choisir un personnage 👇 (tapez 1, 2 ou 3)")
         
         for i in 0...player.team.count-1 {
             
             if player.team[i].life > 0{
-                print("\(i+1): \(player.team[i]) ==> \(player.team[i].name) - PV = \(player.team[i].life) - Effet \(player.team[i].weapon.effect)")
+                print("\(i+1): \(player.team[i].name) ==> \(player.team[i].info)")
             }
         }
         print("----------------------------------")
     }
-    
+
     func getOpponent(player: Player) -> Player {
         if player === player1! {
             return player2!
@@ -119,7 +125,6 @@ class Game {
                 }
             }
         }
-        print ("heroAlive = \(heroAlive) - wizardCount = \(wizardCount)")
         if heroAlive >= 0 && heroAlive != wizardCount{
             return false
         }
@@ -127,7 +132,7 @@ class Game {
     }
     
     func roll(){
-        print("C'est au tour de \(currentPlayer.name)")
+        print("\nC'est au tour de \(currentPlayer.name)")
         fight(attacker: currentPlayer)
         currentPlayer = getOpponent(player: currentPlayer)
         rollCount += 1
@@ -151,17 +156,17 @@ game.startGame()
 while !game.finished(player: game.player1) && !game.finished(player: game.player2){
     game.roll()
 }
-print("jeu terminé")
+print("\n⭐️Fin de la partie !⭐️")
 if game.finished(player: game.player1){
-    print("Félicitaion \(game.player2.name) !")
+    print("\nFélicitation \(game.player2.name) !")
 }else{
-    print("Félicitaion \(game.player1.name) !")
+    print("\nFélicitation \(game.player1.name) !")
 }
-print ("La partie s'est terminée en \(game.rollCount) tours.")
-print("\n\n")
-game.displayChooseHero(player: game.player1, pickerName: game.player1.name)
-game.displayChooseHero(player: game.player2, pickerName: game.player2.name)
-
+if game.rollCount <= 5{
+print ("Wow, ce fût rapide ! Vous avez terrassé votre adversaire en \(game.rollCount) tours.")
+}else{
+    print ("Vous avez terrassé votre adversaire en \(game.rollCount) tours.")
+}
 
 
 /*func fight3(attacker: Player) {
@@ -187,4 +192,3 @@ game.displayChooseHero(player: game.player2, pickerName: game.player2.name)
  }*/
 
 
-//voir commande random pour gerer le hazard Int.random => Apparition du coffre au contenant une nouvelle arme

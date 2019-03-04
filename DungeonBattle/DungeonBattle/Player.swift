@@ -21,7 +21,7 @@ class Player {
             print ("Quel est son nom ?")
             name = readLine()!
             if !isNameUnique(name: name) {
-                  print ("Ce nom est déjà pris !")
+                print ("Ce nom est déjà pris !")
                 name = ""
             }
         }
@@ -52,7 +52,6 @@ class Player {
             }
             //on ajoute le hero à la team
             team.append(hero)
-          
         }
     }
     
@@ -67,12 +66,17 @@ class Player {
     
     func createHero() -> Hero{
         let warrior = Warrior(name: "A")
-        print("\nVeuillez choisir un personnages parmi la liste suivante:")
+        let wizard = Wizard(name: "B")
+        let colossus = Colossus(name: "C")
+        let dwarf = Dwarf(name: "D")
+        let archer = Archer(name: "E")
+        print("\nVeuillez choisir un personnages parmi la liste suivante:\n")
         print("""
             1. \(warrior.info)
-            2. Mage (PV = 70, Baton = 5 soins)
-            3. Colosse (PV = 150, Poings = 20 dégâts)
-            4. Nain (PV = 50, Hache = 40 dégâts)
+            2. \(wizard.info)
+            3. \(colossus.info)
+            4. \(dwarf.info)
+            5. \(archer.info)
             """)
         
         var hero: Hero!
@@ -87,21 +91,9 @@ class Player {
                         hero = Warrior(name: warriorName)
                         isHeroCreated = true
                     case 2:
-                        /*if teamContainsWizard(){
-                            print("\nUn seul Mage par équipe.")
-                            isHeroCreated = false
-                            print("\nVeuillez choisir un personnages parmi la liste suivante:")
-                            print("""
-                            1. Guerrier (PV = 100, Epée = 10 dégâts)
-                            2. Mage (PV = 70, Baton = 5 soin)
-                            3. Colosse (PV = 150, Poings = 20 dégâts)
-                            4. Nain (PV = 50, Hache = 40 dégâts)
-                            """)
-                        }else{*/
-                            let wizardName = createHeroName()
-                            hero = Wizard(name: wizardName)
-                            isHeroCreated = true
-                        //}
+                        let wizardName = createHeroName()
+                        hero = Wizard(name: wizardName)
+                        isHeroCreated = true
                     case 3:
                         let colossusName = createHeroName()
                         hero = Colossus(name: colossusName)
@@ -110,8 +102,12 @@ class Player {
                         let dwarfName = createHeroName()
                         hero = Dwarf(name: dwarfName)
                         isHeroCreated = true
+                    case 5:
+                        let archerName = createHeroName()
+                        hero = Archer(name: archerName)
+                        isHeroCreated = true
                     default:
-                        print("Veuillez taper un chiffre compris entre 1 et 4")
+                        print("Veuillez taper un chiffre compris entre 1 et 5")
                     }
                 }
                 else {
@@ -120,8 +116,6 @@ class Player {
                 }
             }
         }
-        
         return hero
     }
-    
 }
