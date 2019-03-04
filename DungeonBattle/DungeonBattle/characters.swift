@@ -31,18 +31,18 @@ class Hero {
         return ""
     }
     public var info: String{
-        return "\(description) (PV = \(life), \(weapon.type) = \(weapon.effect))"
+        return "\(description) (PV = \(life), \(weapon.type.rawValue) = \(weapon.effect))"
     }
 }
 
-enum WeaponType {
-    case Sword
-    case Stick
-    case Axe
-    case Fists
-    case Bow
+enum WeaponType: String {
+    case Sword = "Epée"
+    case Stick = "Bâton"
+    case Axe = "Hache"
+    case Fists = "Poings"
+    case Bow = "Arc"
 }
-//voir rawValue
+
 
 class Weapon{
     var type: WeaponType

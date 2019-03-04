@@ -5,6 +5,8 @@
 //  Created by Hugues Fils Caparos on 24/12/2018.
 //  Copyright © 2018 Hugues Fils. All rights reserved.
 //
+// MARK: - functions
+import Foundation
 class Game {
     var player1: Player!
     var player2: Player!
@@ -20,7 +22,7 @@ class Game {
         print("\nBienvenue \(name) !")
         return Player(name: name)
     }
-    
+
     func startGame(){
         print ("""
                 Bienvenue dans Dungeon Battle !
@@ -29,6 +31,7 @@ class Game {
                 \n⚔️ Que la partie commence ! ⚔️\n
                 """)
         player1 = createPlayer()
+        sleep(1)
         player1.createTeam()
         print("\nC'est au joueur 2.")
         player2 = createPlayer()
@@ -118,20 +121,21 @@ class Game {
         var wizardCount = 0
         var heroAlive = 0
         for hero in player.team{
-            if hero.life >= 0 {
+            if hero.life > 0 {
                 heroAlive += 1
                 if hero is Wizard {
                     wizardCount += 1
                 }
             }
         }
-        if heroAlive >= 0 && heroAlive != wizardCount{
+        if heroAlive > 0 && heroAlive != wizardCount{
             return false
         }
         return true
     }
     
     func roll(){
+        sleep(1)
         print("\nC'est au tour de \(currentPlayer.name)")
         fight(attacker: currentPlayer)
         currentPlayer = getOpponent(player: currentPlayer)
@@ -141,7 +145,7 @@ class Game {
     func bonus(hero: Hero){
         let randomNumber = Int.random(in: 0...2)
         if rollCount % 2 == randomNumber {
-            print("Un coffre contenant une nouvelle arme est apparût \(hero.name) s'en équipe !")
+            print("Un coffre contenant une nouvelle arme est apparût, \(hero.name) s'en équipe !")
             hero.weapon.effect = hero.genWeaponEffect()
             print ("Le nouvel effet de son arme est de \(hero.weapon.effect).")
         }
@@ -192,3 +196,4 @@ print ("Wow, ce fût rapide ! Vous avez terrassé votre adversaire en \(game.rol
  }*/
 
 
+// rajouter sleep, commentaire, diagramme, pdf presentations tout ca sur powerpoint
