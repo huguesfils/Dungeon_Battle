@@ -7,6 +7,7 @@
 //
 // MARK: - functions
 import Foundation
+
 class Game {
     var player1: Player!
     var player2: Player!
@@ -22,25 +23,30 @@ class Game {
         print("\nBienvenue \(name) !")
         return Player(name: name)
     }
-
+    
     func startGame(){
+        // Introduction, game rules
         print ("""
-                Bienvenue dans Dungeon Battle !
-                \nLe but du jeu est d'éliminer l'équipe adverse. Choisissez vos héros avec soin,
-                et gardez en tête que le mage ne peux que soigner ses alliés !
+                Bienvenue dans Dungeon Battle 🏰
+                \nLe but du jeu est d'éliminer l'équipe adverse. Vous devez constituez une équipe de 3 personnage parmi les 5 disponibles.
+                \nLe magicien ne peux que soigner ses alliés, s'il est seul survivant de votre équipe vous perdez la partie.
+                Choisissez vos héros avec soin !
                 \n⚔️ Que la partie commence ! ⚔️\n
                 """)
+        sleep(1)
         player1 = createPlayer()
         sleep(1)
         player1.createTeam()
+        sleep(1)
         print("\nC'est au joueur 2.")
         player2 = createPlayer()
+        sleep(1)
         player2.createTeam()
         self.currentPlayer = player1
     }
     
     func chooseHero(player: Player, pickerName: String) -> Hero {
-       displayChooseHero(player: player, pickerName: pickerName)
+        displayChooseHero(player: player, pickerName: pickerName)
         var index = -1
         repeat {
             if let choice = readLine(){ // on vérifie que l'utilisateur a bien saisi une String
@@ -79,7 +85,7 @@ class Game {
         }
         print("----------------------------------")
     }
-
+    
     func getOpponent(player: Player) -> Player {
         if player === player1! {
             return player2!
@@ -136,7 +142,7 @@ class Game {
     
     func roll(){
         sleep(1)
-        print("\nC'est au tour de \(currentPlayer.name)")
+        print("\nC'est au tour de \(currentPlayer.name).")
         fight(attacker: currentPlayer)
         currentPlayer = getOpponent(player: currentPlayer)
         rollCount += 1
@@ -149,17 +155,16 @@ class Game {
             hero.weapon.effect = hero.genWeaponEffect()
             print ("Le nouvel effet de son arme est de \(hero.weapon.effect).")
         }
+        sleep(1)
     }
 }
-
-
-
 
 let game = Game()
 game.startGame()
 while !game.finished(player: game.player1) && !game.finished(player: game.player2){
     game.roll()
 }
+sleep(1)
 print("\n⭐️Fin de la partie !⭐️")
 if game.finished(player: game.player1){
     print("\nFélicitation \(game.player2.name) !")
@@ -167,7 +172,7 @@ if game.finished(player: game.player1){
     print("\nFélicitation \(game.player1.name) !")
 }
 if game.rollCount <= 5{
-print ("Wow, ce fût rapide ! Vous avez terrassé votre adversaire en \(game.rollCount) tours.")
+    print ("Wow, ce fût rapide ! Vous avez terrassé votre adversaire en \(game.rollCount) tours.")
 }else{
     print ("Vous avez terrassé votre adversaire en \(game.rollCount) tours.")
 }
@@ -196,4 +201,4 @@ print ("Wow, ce fût rapide ! Vous avez terrassé votre adversaire en \(game.rol
  }*/
 
 
-// rajouter sleep, commentaire, diagramme, pdf presentations tout ca sur powerpoint
+// rajouter sleep et MARKs, commentaire, diagramme, pdf presentations tout ca sur powerpoint

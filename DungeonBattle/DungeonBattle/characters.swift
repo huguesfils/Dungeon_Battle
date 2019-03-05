@@ -43,7 +43,6 @@ enum WeaponType: String {
     case Bow = "Arc"
 }
 
-
 class Weapon{
     var type: WeaponType
     var effect: Int
@@ -53,8 +52,6 @@ class Weapon{
         self.effect = effect
     }
 }
-
-
 
 class Warrior: Hero, CustomStringConvertible {
     // medium skills
@@ -108,5 +105,5 @@ class Archer: Hero, CustomStringConvertible {
 
 
 /* let myWarrior = Warrior()
-print(myWarrior) => fait implicitiment reference à myWarriior.description
-*/
+ print(myWarrior) => fait implicitiment reference à myWarriior.description
+ */
