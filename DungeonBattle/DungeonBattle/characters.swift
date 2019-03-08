@@ -6,8 +6,8 @@
 //  Copyright © 2018 Hugues Fils. All rights reserved.
 //
 
-var heroNameDict = [String: Any]()
-
+var heroNameDict = [String: Any]() // ???
+// A Hero class with all properties a character needs
 class Hero {
     var name: String
     var life: Int
@@ -21,16 +21,18 @@ class Hero {
         self.weapon = weapon
     }
     
-    func genWeaponEffect() -> Int{
-        if weapon.effect < 0 {
+    func genWeaponEffect() -> Int{  // We need to generate a new weapon effect as request in the bonus chest
+        if weapon.effect < 0 {    //  if a hero causes damages, the effect will be less than 0
             return Int.random(in: weapon.effect - 10...weapon.effect - 5)
-        }
+        } // if not, the hero can heal so the effect will be superior than 0
         return Int.random(in: weapon.effect + 5...weapon.effect + 10)
     }
-    public var description: String{
+   
+    public var description: String{ // We need a public description for calling a hero the way we want, whithout changing the name -> Warrior become "Guerrier", easy to translate.
         return ""
     }
-    public var info: String{
+    
+    public var info: String{ // with .info we have all infos we need in one command
         return "\(description) (PV = \(life), \(weapon.type.rawValue) = \(weapon.effect))"
     }
 }
@@ -52,9 +54,8 @@ class Weapon{
         self.effect = effect
     }
 }
-
+ // each characters heritate the Hero class, each characters is a class, with their own properties and description
 class Warrior: Hero, CustomStringConvertible {
-    // medium skills
     init(name: String){
         super.init(name: name, life: 100, weapon: Weapon(type: .Sword, effect: -10))
     }
@@ -64,7 +65,6 @@ class Warrior: Hero, CustomStringConvertible {
 }
 
 class Wizard: Hero, CustomStringConvertible {
-    // healing only, not himself
     init(name: String){
         super.init(name: name, life: 130, weapon: Weapon(type: .Stick, effect: 5))
     }
@@ -74,7 +74,6 @@ class Wizard: Hero, CustomStringConvertible {
 }
 
 class Colossus: Hero, CustomStringConvertible {
-    // powerful, less damages, only fists
     init(name: String){
         super.init(name: name, life: 150, weapon: Weapon(type: .Fists, effect: -20))
     }
@@ -84,7 +83,6 @@ class Colossus: Hero, CustomStringConvertible {
 }
 
 class Dwarf: Hero, CustomStringConvertible {
-    // big axe, power damage, low life
     init(name: String){
         super.init(name: name, life: 70, weapon: Weapon(type: .Axe, effect: -40))
     }
@@ -94,7 +92,6 @@ class Dwarf: Hero, CustomStringConvertible {
 }
 
 class Archer: Hero, CustomStringConvertible {
-    // medium skills
     init(name: String){
         super.init(name: name, life: 50, weapon: Weapon(type: .Bow, effect: -50))
     }
@@ -102,8 +99,3 @@ class Archer: Hero, CustomStringConvertible {
         return "Archer 🏹"
     }
 }
-
-
-/* let myWarrior = Warrior()
- print(myWarrior) => fait implicitiment reference à myWarriior.description
- */

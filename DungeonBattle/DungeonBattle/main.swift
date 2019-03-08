@@ -5,7 +5,7 @@
 //  Created by Hugues Fils Caparos on 24/12/2018.
 //  Copyright © 2018 Hugues Fils. All rights reserved.
 //
-// MARK: - functions
+
 import Foundation
 
 class Game {
@@ -158,7 +158,7 @@ class Game {
         sleep(1)
     }
 }
-
+// MARK: - Game execution
 let game = Game()
 game.startGame()
 while !game.finished(player: game.player1) && !game.finished(player: game.player2){
@@ -176,29 +176,3 @@ if game.rollCount <= 5{
 }else{
     print ("Vous avez terrassé votre adversaire en \(game.rollCount) tours.")
 }
-
-
-/*func fight3(attacker: Player) {
- var opponentHero: Hero!
- let opponent = getOpponent(player: attacker)
- let attackerHero = chooseHero(player: attacker, pickerName: attacker.name)
- if attackerHero is Wizard {
- opponentHero = chooseHero(player: attacker, pickerName: attacker.name)
- }else{
- opponentHero = chooseHero(player: opponent, pickerName: attacker.name)
- }
- opponentHero.life += attackerHero.weapon.effect
- }
- 
- func fight2(attacker: Player) {
- var opponent = getOpponent(player: attacker)
- let attackerHero = chooseHero(player: attacker, pickerName: attacker.name)
- if attackerHero is Wizard {
- opponent = attacker
- }
- let opponentHero = chooseHero(player: opponent, pickerName: attacker.name)
- opponentHero.life += attackerHero.weapon.effect
- }*/
-
-
-// rajouter sleep et MARKs, commentaire, diagramme, pdf presentations tout ca sur powerpoint
