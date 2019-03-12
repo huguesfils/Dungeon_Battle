@@ -35,17 +35,8 @@ class Player { // A player need a name and an array (a team).
         heroNameDict[name] = name // We put all the names in an array
         return name
     }
-    /*
-     func teamContainsWizard() -> Bool{
-     for hero in team{
-     if hero is Wizard{
-     return true
-     }
-     }
-     return false
-     }*/
     
-    func createHero() -> Hero{
+    func displayHeroChoice() {
         let warrior = Warrior(name: "A")
         let wizard = Wizard(name: "B")
         let colossus = Colossus(name: "C")
@@ -59,6 +50,10 @@ class Player { // A player need a name and an array (a team).
             4. \(dwarf.info)
             5. \(archer.info)
             """)
+    }
+    
+    func createHero() -> Hero{
+        displayHeroChoice()
         
         var hero: Hero! // Hero is an optional, here we are sure that Hero contains a value
         var isHeroCreated = false 

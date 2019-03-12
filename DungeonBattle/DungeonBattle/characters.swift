@@ -6,7 +6,7 @@
 //  Copyright © 2018 Hugues Fils. All rights reserved.
 //
 
-var heroNameDict = [String: Any]() // ???
+var heroNameDict = [String: Any]() // comenter : evite les noms multiples
 // A Hero class with all properties a character needs
 class Hero {
     var name: String
@@ -36,7 +36,7 @@ class Hero {
         return "\(description) (PV = \(life), \(weapon.type.rawValue) = \(weapon.effect))"
     }
 }
-
+// enumeration qui contient tt les type d'arme dispo + valeur assicé est la trad fr
 enum WeaponType: String {
     case Sword = "Epée"
     case Stick = "Bâton"
@@ -44,10 +44,10 @@ enum WeaponType: String {
     case Fists = "Poings"
     case Bow = "Arc"
 }
-
+// a quoi sert la class weapon
 class Weapon{
     var type: WeaponType
-    var effect: Int
+    var effect: Int // +/-
     
     init(type: WeaponType, effect: Int){
         self.type = type
@@ -55,7 +55,7 @@ class Weapon{
     }
 }
  // each characters heritate the Hero class, each characters is a class, with their own properties and description
-class Warrior: Hero, CustomStringConvertible {
+class Warrior: Hero { //
     init(name: String){
         super.init(name: name, life: 100, weapon: Weapon(type: .Sword, effect: -10))
     }
@@ -64,7 +64,7 @@ class Warrior: Hero, CustomStringConvertible {
     }
 }
 
-class Wizard: Hero, CustomStringConvertible {
+class Wizard: Hero {
     init(name: String){
         super.init(name: name, life: 130, weapon: Weapon(type: .Stick, effect: 5))
     }
@@ -73,7 +73,7 @@ class Wizard: Hero, CustomStringConvertible {
     }
 }
 
-class Colossus: Hero, CustomStringConvertible {
+class Colossus: Hero {
     init(name: String){
         super.init(name: name, life: 150, weapon: Weapon(type: .Fists, effect: -20))
     }
@@ -82,7 +82,7 @@ class Colossus: Hero, CustomStringConvertible {
     }
 }
 
-class Dwarf: Hero, CustomStringConvertible {
+class Dwarf: Hero {
     init(name: String){
         super.init(name: name, life: 70, weapon: Weapon(type: .Axe, effect: -40))
     }
@@ -91,7 +91,7 @@ class Dwarf: Hero, CustomStringConvertible {
     }
 }
 
-class Archer: Hero, CustomStringConvertible {
+class Archer: Hero {
     init(name: String){
         super.init(name: name, life: 50, weapon: Weapon(type: .Bow, effect: -50))
     }
