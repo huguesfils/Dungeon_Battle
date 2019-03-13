@@ -6,7 +6,7 @@
 //  Copyright © 2018 Hugues Fils. All rights reserved.
 //
 
-var heroNameDict = [String: Any]() // comenter : evite les noms multiples
+var heroNameDict = [String: Any]() // We need to put the name entered by player in a dictionnary to verify if the names are unique and it is provived an easily acces to any value.
 // A Hero class with all properties a character needs
 class Hero {
     var name: String
@@ -36,7 +36,7 @@ class Hero {
         return "\(description) (PV = \(life), \(weapon.type.rawValue) = \(weapon.effect))"
     }
 }
-// enumeration qui contient tt les type d'arme dispo + valeur assicé est la trad fr
+// The enumeration contains all the weapon types we need, and we can add a value for translation.
 enum WeaponType: String {
     case Sword = "Epée"
     case Stick = "Bâton"
@@ -44,7 +44,7 @@ enum WeaponType: String {
     case Fists = "Poings"
     case Bow = "Arc"
 }
-// a quoi sert la class weapon
+// We create a weapon class, thank to this we can call .weapon anywere we want, and a weapon is an object that we can use everywhere in the program
 class Weapon{
     var type: WeaponType
     var effect: Int // +/-

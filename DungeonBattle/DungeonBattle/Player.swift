@@ -32,7 +32,7 @@ class Player { // A player need a name and an array (a team).
                 name = ""
             }
         }
-        heroNameDict[name] = name // We put all the names in an array
+        heroNameDict[name] = name // We put all the names in the dictionnary.
         return name
     }
     
