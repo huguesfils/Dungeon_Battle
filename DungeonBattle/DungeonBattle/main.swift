@@ -176,5 +176,3 @@ if game.rollCount <= 5{
 }else{
     print ("Vous avez terrassé votre adversaire en \(game.rollCount) tours.")
 }
-//test
-
