@@ -54,7 +54,7 @@ class Game {
                     switch choiceInt {
                     case 1, 2, 3 : // si l'utilisateur a saisi 1, 2 ou 3
                         index = choiceInt-1 // on met à jour le bon index
-                        print ("Vous avez choisi \(player.team[index])")
+                        print ("Vous avez choisi \(player.team[index].name)")
                         if player.team[index].life <= 0 {
                             print ("Ce personnage est mort.")
                             displayChooseHero(player: player, pickerName: pickerName)
