@@ -9,34 +9,35 @@
 import Foundation
 
 class Game {
-    var player1: Player!
+    var player1: Player! // We need 2 players, so we create them and we say that the player is a Player, it's an optional so we unwrap it.
     var player2: Player!
     var currentPlayer: Player!
     var rollCount = 0
     
-    func createPlayer() -> Player {
-        var name = ""
+    func createPlayer() -> Player { //We need to create the player
+        var name = "" // the default name is nothing, it's empty
         while name.isEmpty {
             print ("\nQuel est votre nom ?")
-            name = readLine()!
+            name = readLine()!// the user enter his name
         }
         print("\nBienvenue \(name) !")
-        return Player(name: name)
+        return Player(name: name) // the function create the player with the name writen by the user
     }
     
-    func startGame(){
+    func startGame(){ // the beginning of the need a proper exection
         // Introduction, game rules
         print ("""
                 Bienvenue dans Dungeon Battle 🏰
-                \nLe but du jeu est d'éliminer l'équipe adverse. Vous devez constituez une équipe de 3 personnage parmi les 5 disponibles.
+                \nLe but du jeu est d'éliminer l'équipe adverse. Vous devez constituez une équipe de 3 personnage parmi les 5
+                disponibles.
                 \nLe magicien ne peux que soigner ses alliés, s'il est seul survivant de votre équipe vous perdez la partie.
                 Choisissez vos héros avec soin !
                 \n⚔️ Que la partie commence ! ⚔️\n
                 """)
+        sleep(1)// We ask the game to reduce the display speed (1sec)
+        player1 = createPlayer() // the player 1 is created by the function createPlayer()
         sleep(1)
-        player1 = createPlayer()
-        sleep(1)
-        player1.createTeam()
+        player1.createTeam() // Same for his team (func in Player.swift)
         sleep(1)
         print("\nC'est au joueur 2.")
         player2 = createPlayer()
@@ -45,34 +46,7 @@ class Game {
         self.currentPlayer = player1
     }
     
-    func chooseHero(player: Player, pickerName: String) -> Hero {
-        displayChooseHero(player: player, pickerName: pickerName)
-        var index = -1
-        repeat {
-            if let choice = readLine(){ // on vérifie que l'utilisateur a bien saisi une String
-                if let choiceInt = Int(choice){ // on vérifie que ce qui est saisi est bien un entier (on essaye de le convertir, si ça passe OK)
-                    switch choiceInt {
-                    case 1, 2, 3 : // si l'utilisateur a saisi 1, 2 ou 3
-                        index = choiceInt-1 // on met à jour le bon index
-                        print ("Vous avez choisi \(player.team[index].name)")
-                        if player.team[index].life <= 0 {
-                            print ("Ce personnage est mort.")
-                            displayChooseHero(player: player, pickerName: pickerName)
-                            index = -1
-                        }
-                        
-                    default: // dans les autres cas index n'est pas touché et vaut donc -1
-                        print("Je ne comprends pas")
-                    }
-                }
-            }
-            
-        } while index < 0 //on recommence tant que index n'a pas une valeur correcte (car un tableau commence toujours à l'index 0)
-        
-        return player.team[index]
-    }
-    
-    func displayChooseHero(player: Player, pickerName: String){
+    func displayChooseHero(player: Player, pickerName: String){ // We have to show to the user his team
         print("----------------------------------")
         print("\(pickerName) :")
         print("Veuillez choisir un personnage 👇 (tapez 1, 2 ou 3)")
@@ -86,44 +60,83 @@ class Game {
         print("----------------------------------")
     }
     
-    func getOpponent(player: Player) -> Player {
-        if player === player1! {
+    func chooseHero(player: Player, pickerName: String) -> Hero { // now the user have to choose a hero for fight or heal
+        displayChooseHero(player: player, pickerName: pickerName)
+        var index = -1
+        repeat {
+            if let choice = readLine(){ // We check that the user use the keyboard
+                if let choiceInt = Int(choice){ // we veryfied that the key entered is a Int
+                    switch choiceInt {
+                    case 1, 2, 3 : // if the user enter 1, 2 or 3
+                        index = choiceInt-1 // we update the choice counter
+                        print ("Vous avez choisi \(player.team[index].name)")
+                        if player.team[index].life <= 0 { //
+                            print ("Ce personnage est mort.")
+                            displayChooseHero(player: player, pickerName: pickerName)
+                            index = -1
+                        }
+                        
+                    default: // In the other cases the index is not modified, so it is still -1
+                        print("Je ne comprends pas")
+                    }
+                }
+            }
+            
+        } while index < 0 //We do it again until the index does not have a correct value (an array always starts at 0)
+        
+        return player.team[index]
+    }
+
+    func getOpponent(player: Player) -> Player {// how to get the opponent
+        if player === player1! { // if the player is player1 we return player 2
             return player2!
         }
         else {
-            return player1!
+            return player1! // if not we did the opposit
         }
     }
-    
-    func displayTeam(player: Player){
-        for hero in player.team{
-            print("\(hero.name) - \(hero.life)")
+   
+    func bonus(hero: Hero){// we need to generate a random new effect for weapons
+        let randomNumber = Int.random(in: 0...2) // our random number is between 0 and 2
+        if rollCount % 2 == randomNumber { // we use the .genWeponEffect
+            print("Un coffre contenant une nouvelle arme est apparût, \(hero.name) s'en équipe !")
+            hero.weapon.effect = hero.genWeaponEffect()
+            print ("Le nouvel effet de son arme est de \(hero.weapon.effect).")
         }
+        sleep(1)
     }
     
     func fight(attacker: Player) {
         let attackerHero = chooseHero(player: attacker, pickerName: attacker.name)
         bonus(hero: attackerHero)
-        if attackerHero is Wizard {
+        if attackerHero is Wizard { // the wizard can only heal
             var healedHero:Hero!
             repeat {
-                healedHero = chooseHero(player: attacker, pickerName: attacker.name)
+                healedHero = chooseHero(player: attacker, pickerName: attacker.name) // we need to avoid self heal
                 if attackerHero.name == healedHero.name {
                     print("\(attackerHero.name) ne peut pas s'auto-soigner !")
                 }
-            } while attackerHero.name == healedHero.name
+            } while attackerHero.name == healedHero.name // avoid heal beyond the maximum life points of a hero
             healedHero.life += attackerHero.weapon.effect
             if healedHero.life > healedHero.maxLife {
                 healedHero.life = healedHero.maxLife
             }
-        } else {
-            let opponent = getOpponent(player: attacker)
+        } else { //
+            let opponent = getOpponent(player: attacker) // the opponent is created by getOpponent()
             let opponentHero = chooseHero(player: opponent, pickerName: attacker.name)
             opponentHero.life += attackerHero.weapon.effect
         }
     }
     
-    func finished(player: Player) -> Bool {
+    func roll(){// need a function roll to change the current player
+        sleep(1)
+        print("\nC'est au tour de \(currentPlayer.name).")
+        fight(attacker: currentPlayer)
+        currentPlayer = getOpponent(player: currentPlayer)
+        rollCount += 1
+    }
+
+    func finished(player: Player) -> Bool { 
         var wizardCount = 0
         var heroAlive = 0
         for hero in player.team{
@@ -138,24 +151,6 @@ class Game {
             return false
         }
         return true
-    }
-    
-    func roll(){
-        sleep(1)
-        print("\nC'est au tour de \(currentPlayer.name).")
-        fight(attacker: currentPlayer)
-        currentPlayer = getOpponent(player: currentPlayer)
-        rollCount += 1
-    }
-    
-    func bonus(hero: Hero){
-        let randomNumber = Int.random(in: 0...2)
-        if rollCount % 2 == randomNumber {
-            print("Un coffre contenant une nouvelle arme est apparût, \(hero.name) s'en équipe !")
-            hero.weapon.effect = hero.genWeaponEffect()
-            print ("Le nouvel effet de son arme est de \(hero.weapon.effect).")
-        }
-        sleep(1)
     }
 }
 // MARK: - Game execution

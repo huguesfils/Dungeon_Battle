@@ -56,7 +56,7 @@ class Player { // A player need a name and an array (a team).
         displayHeroChoice()
         
         var hero: Hero! // Hero is an optional, here we are sure that Hero contains a value
-        var isHeroCreated = false 
+        var isHeroCreated = false  // we create a variable for
         
         while !isHeroCreated {
             if let line = readLine(){
@@ -97,8 +97,8 @@ class Player { // A player need a name and an array (a team).
     
     func createTeam() {
         var wizardCount = 0
-        for _ in 1...HERO_PER_TEAM { // the loop goes from 1 to 3 (HERO_PER_TEAM is a maximum)
-            var hero = createHero() // we ask the player to choose a character
+        for _ in 1...HERO_PER_TEAM { // The loop goes from 1 to 3 (HERO_PER_TEAM is a maximum)
+            var hero = createHero() // We ask the player to choose a character
             // While the chosen hero is a wizard and we've reach le maximum number of wizard in a team,
             while hero is Wizard && wizardCount == HERO_PER_TEAM - 1{
                 print("Vous ne pouvez pas avoir plus de \(HERO_PER_TEAM - 1) mages !")
