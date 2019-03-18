@@ -27,7 +27,7 @@ class Hero {
         } // if not, the hero can heal so the effect will be superior than 0
         return Int.random(in: weapon.effect + 5...weapon.effect + 10)
     }
-   
+    
     public var description: String{ // We need a public description for calling a hero the way we want, whithout changing the name -> Warrior become "Guerrier", easy to translate.
         return ""
     }
@@ -54,7 +54,7 @@ class Weapon{
         self.effect = effect
     }
 }
- // each characters heritate the Hero class, each characters is a class, with their own properties and description
+// each characters heritate the Hero class, each characters is a class, with their own properties and description
 class Warrior: Hero { //
     init(name: String){
         super.init(name: name, life: 100, weapon: Weapon(type: .Sword, effect: -10))

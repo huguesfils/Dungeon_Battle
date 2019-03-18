@@ -15,7 +15,7 @@ class Player { // A player need a name and an array (a team).
         self.name = name
     }
     
-    func isNameUnique(name: String) -> Bool{ // To check if the name is unique, we have to verify all the names in the array
+    func isNameUnique(name: String) -> Bool{ // To check if the name is unique, we have to verify every names in the array
         if heroNameDict[name] != nil{
             return false
         }
@@ -36,7 +36,7 @@ class Player { // A player need a name and an array (a team).
         return name
     }
     
-    func displayHeroChoice() {
+    func displayHeroChoice() { // we could have created a static method that directly returns .info without having to create an instance
         let warrior = Warrior(name: "A")
         let wizard = Wizard(name: "B")
         let colossus = Colossus(name: "C")
@@ -54,45 +54,37 @@ class Player { // A player need a name and an array (a team).
     
     func createHero() -> Hero{
         displayHeroChoice()
-        
         var hero: Hero! // Hero is an optional, here we are sure that Hero contains a value
         var isHeroCreated = false  // we create a variable for
-        
         while !isHeroCreated {
-            if let line = readLine(){
+            if let line = readLine(){ // we want the user enter a number
                 if let choice = Int(line) {
-                    switch choice {
-                    case 1:
-                        let warriorName = createHeroName()
-                        hero = Warrior(name: warriorName)
+                    if choice > 0 && choice <= 5{ // he has to choose beetween 1 and 5
+                        let heroName = createHeroName()
                         isHeroCreated = true
-                    case 2:
-                        let wizardName = createHeroName()
-                        hero = Wizard(name: wizardName)
-                        isHeroCreated = true
-                    case 3:
-                        let colossusName = createHeroName()
-                        hero = Colossus(name: colossusName)
-                        isHeroCreated = true
-                    case 4:
-                        let dwarfName = createHeroName()
-                        hero = Dwarf(name: dwarfName)
-                        isHeroCreated = true
-                    case 5:
-                        let archerName = createHeroName()
-                        hero = Archer(name: archerName)
-                        isHeroCreated = true
-                    default:
-                        print("Veuillez taper un chiffre compris entre 1 et 5")
+                        switch choice {
+                        case 1:
+                            hero = Warrior(name: heroName) // if 1 it is a warrior with a name entered during the running of createHeroName()
+                        case 2:
+                            hero = Wizard(name: heroName)
+                        case 3:
+                            hero = Colossus(name: heroName)
+                        case 4:
+                            hero = Dwarf(name: heroName)
+                        case 5:
+                            hero = Archer(name: heroName)
+                        default :
+                            print("") // their is no default, so we create an empty string as a default
+                        }
+                    }else{
+                        print("Veuillez taper un chiffre compris entre 1 et 5.")
                     }
-                }
-                else {
-                    print("Veuillez taper un chiffre compris entre 1 et 4")
-                    isHeroCreated = false
+                }else{
+                    print("Veuillez taper un chiffre !")
                 }
             }
         }
-        return hero
+        return hero // the hero is created 
     }
     
     func createTeam() {

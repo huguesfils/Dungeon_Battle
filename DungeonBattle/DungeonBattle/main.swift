@@ -9,7 +9,7 @@
 import Foundation
 
 class Game {
-    var player1: Player! // We need 2 players, so we create them and we say that the player is a Player, it's an optional so we unwrap it.
+    var player1: Player! // We need 2 players, so we create them and we say that the player is a Player (class), it's an optional so we unwrap it.
     var player2: Player!
     var currentPlayer: Player!
     var rollCount = 0
@@ -65,7 +65,7 @@ class Game {
         var index = -1
         repeat {
             if let choice = readLine(){ // We check that the user use the keyboard
-                if let choiceInt = Int(choice){ // we veryfied that the key entered is a Int
+                if let choiceInt = Int(choice){ // we check that the key entered is an Int
                     switch choiceInt {
                     case 1, 2, 3 : // if the user enter 1, 2 or 3
                         index = choiceInt-1 // we update the choice counter
@@ -82,23 +82,23 @@ class Game {
                 }
             }
             
-        } while index < 0 //We do it again until the index does not have a correct value (an array always starts at 0)
+        } while index < 0 // We do it again until the index does not have a correct value (an array always starts at 0)
         
         return player.team[index]
     }
-
+    
     func getOpponent(player: Player) -> Player {// how to get the opponent
         if player === player1! { // if the player is player1 we return player 2
             return player2!
         }
         else {
-            return player1! // if not we did the opposit
+            return player1! // if not, we do the opposit
         }
     }
-   
+    
     func bonus(hero: Hero){// we need to generate a random new effect for weapons
-        let randomNumber = Int.random(in: 0...2) // our random number is between 0 and 2
-        if rollCount % 2 == randomNumber { // we use the .genWeponEffect
+        let randomNumber = Int.random(in: 0...2) // our random number is between 0 and 2, even or odd
+        if rollCount % 2 == randomNumber { // if the randomNumber is equal to the rest of the division by 2, we use the .genWeponEffect
             print("Un coffre contenant une nouvelle arme est apparût, \(hero.name) s'en équipe !")
             hero.weapon.effect = hero.genWeaponEffect()
             print ("Le nouvel effet de son arme est de \(hero.weapon.effect).")
@@ -128,14 +128,14 @@ class Game {
         }
     }
     
-    func roll(){// need a function roll to change the current player
+    func roll(){ // need a function roll to change the current player
         sleep(1)
         print("\nC'est au tour de \(currentPlayer.name).")
         fight(attacker: currentPlayer)
         currentPlayer = getOpponent(player: currentPlayer)
         rollCount += 1
     }
-
+    
     func finished(player: Player) -> Bool {
         var wizardCount = 0
         var heroAlive = 0
@@ -153,6 +153,10 @@ class Game {
         return true // if not the game is finished
     }
 }
+
+
+// Main loop
+
 // MARK: - Game execution
 let game = Game()
 game.startGame()
