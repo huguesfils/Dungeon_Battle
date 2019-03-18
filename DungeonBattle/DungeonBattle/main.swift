@@ -136,28 +136,28 @@ class Game {
         rollCount += 1
     }
 
-    func finished(player: Player) -> Bool { 
+    func finished(player: Player) -> Bool {
         var wizardCount = 0
         var heroAlive = 0
-        for hero in player.team{
-            if hero.life > 0 {
-                heroAlive += 1
-                if hero is Wizard {
+        for hero in player.team{ // we check every hero in the team
+            if hero.life > 0 { // If their life is over 0
+                heroAlive += 1 // we add 1 to the heroAlive counter
+                if hero is Wizard { // same if it is a wizard
                     wizardCount += 1
                 }
             }
         }
-        if heroAlive > 0 && heroAlive != wizardCount{
-            return false
+        if heroAlive > 0 && heroAlive != wizardCount{ // If is their a hero still alive and if the number of hero is defferent of the number of wizard
+            return false // then the game is not finished
         }
-        return true
+        return true // if not the game is finished
     }
 }
 // MARK: - Game execution
 let game = Game()
 game.startGame()
-while !game.finished(player: game.player1) && !game.finished(player: game.player2){
-    game.roll()
+while !game.finished(player: game.player1) && !game.finished(player: game.player2){ // while the game is not finished
+    game.roll() // function roll() continues to work
 }
 sleep(1)
 print("\n⭐️Fin de la partie !⭐️")
