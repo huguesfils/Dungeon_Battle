@@ -55,7 +55,7 @@ class Weapon{
     }
 }
 // each characters heritate the Hero class, each characters is a class, with their own properties and description
-class Warrior: Hero { //
+class Warrior: Hero {
     init(name: String){
         super.init(name: name, life: 100, weapon: Weapon(type: .Sword, effect: -10))
     }

@@ -55,7 +55,7 @@ class Player { // A player need a name and an array (a team).
     func createHero() -> Hero{
         displayHeroChoice()
         var hero: Hero! // Hero is an optional, here we are sure that Hero contains a value
-        var isHeroCreated = false  // we create a variable for
+        var isHeroCreated = false
         while !isHeroCreated {
             if let line = readLine(){ // we want the user enter a number
                 if let choice = Int(line) {
@@ -64,7 +64,7 @@ class Player { // A player need a name and an array (a team).
                         isHeroCreated = true
                         switch choice {
                         case 1:
-                            hero = Warrior(name: heroName) // if 1 it is a warrior with a name entered during the running of createHeroName()
+                            hero = Warrior(name: heroName) // if 1, it is a warrior with a name entered during the running of createHeroName()
                         case 2:
                             hero = Wizard(name: heroName)
                         case 3:
@@ -84,7 +84,7 @@ class Player { // A player need a name and an array (a team).
                 }
             }
         }
-        return hero // the hero is created 
+        return hero // the hero is created
     }
     
     func createTeam() {

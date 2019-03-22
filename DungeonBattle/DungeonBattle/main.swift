@@ -37,7 +37,7 @@ class Game {
         sleep(1)// We ask the game to reduce the display speed (1sec)
         player1 = createPlayer() // the player 1 is created by the function createPlayer()
         sleep(1)
-        player1.createTeam() // Same for his team (func in Player.swift)
+        player1.createTeam() // Same for his team (func in Player.swift line 90)
         sleep(1)
         print("\nC'est au joueur 2.")
         player2 = createPlayer()
@@ -147,7 +147,7 @@ class Game {
                 }
             }
         }
-        if heroAlive > 0 && heroAlive != wizardCount{ // If is their a hero still alive and if the number of hero is defferent of the number of wizard
+        if heroAlive > 0 && heroAlive != wizardCount{ // If their is a hero still alive and if the number of hero is different of the number of wizards
             return false // then the game is not finished
         }
         return true // if not the game is finished
