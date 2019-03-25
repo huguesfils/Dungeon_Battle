@@ -147,10 +147,10 @@ class Game {
                 }
             }
         }
-        if heroAlive > 0 && heroAlive != wizardCount{ // If their is a hero still alive and if the number of hero is different of the number of wizards
+        if heroAlive > 0 && heroAlive != wizardCount{ // If there is a hero still alive and if the number of hero is different of the number of wizards
             return false // then the game is not finished
         }
-        return true // if not the game is finished
+        return true // if not, the game ends
     }
 }
 
